@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_12sdp"
+    app:cardBackgroundColor="@color/card_background"
+    app:cardCornerRadius="@dimen/_12sdp"
+    app:cardElevation="@dimen/_8sdp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8sdp"
+        app:cardCornerRadius="@dimen/_12sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/maintvlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/job_title_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:padding="@dimen/_6sdp"
+                    android:text="Sr. Android Developer."
+                    android:textColor="@color/primary_text"
+                    android:textSize="@dimen/text_size_18"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/ivCompnayImageId"
+                    android:layout_gravity="right"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:padding="@dimen/_4sdp"
+                    android:layout_weight="0.5"
+                    android:scaleType="fitXY" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_1dp"
+                android:layout_below="@id/maintvlayout"
+                android:background="#dddddd" />
+
+
+            <!--for experience layout-->
+
+            <LinearLayout
+                android:id="@+id/expriance_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/view"
+                android:padding="@dimen/_4sdp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.8">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_briefcase" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/expriance_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_weight="0.2"
+                    android:gravity="center_vertical"
+                    android:text="5 - 8 Years "
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <!--for location layout-->
+            <LinearLayout
+                android:id="@+id/Address_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/expriance_layout"
+                android:padding="@dimen/_4sdp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.8">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_maps_and_flags" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/companyname_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_weight="0.2"
+                    android:gravity="center_vertical"
+                    android:text="Dollop Infotech pvt.ltd."
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <!--for skills layout-->
+
+            <LinearLayout
+                android:id="@+id/skill_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Address_layout"
+                android:padding="@dimen/_4sdp"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.8">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_edit" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/skill_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_16sdp"
+                    android:layout_weight="0.2"
+                    android:gravity="center_vertical"
+                    android:text="work on Android studio, solid understanding of core java and android sdk. also known about git."
+                    android:textSize="@dimen/text_size_16" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/skill_layout"
+                android:orientation="horizontal">
+
+
+
+                <TextView
+                    android:id="@+id/View_btn"
+                    android:drawableLeft="@drawable/buy_coin_background"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:drawableStart="@drawable/ic_visible"
+                    android:text="Veiw"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:padding="@dimen/_4sdp"
+                    android:textColor="@color/secondary_text"
+                    />
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/currentdate_yv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_4sdp"
+                    android:text="2018-07-21"
+                    android:textSize="@dimen/text_size_16" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</android.support.v7.widget.CardView>

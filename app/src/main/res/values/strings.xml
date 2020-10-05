@@ -1,0 +1,73 @@
+<resources>
+    <string name="app_name">Placement Adda</string>
+    <string name="no_internet">No Internet Connection!</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="job_desc"> Design and build advanced applications for the Android platform.Collaborate with cross-functional teams to define, design, and ship new features.Continuously discover, evaluate, and implement new technologies to maximize development efficiency.Proven software development experience and Android skills development.Proven working experience in Android app development an have published at least one original Android app.Experience working with remote data via REST and JSON.* Experience with third-party libraries and APIs. </string>
+
+    <string name="experience">Android development: 1 year \n work: 1 year</string>
+    <string name="dollop_email_id">dollopinfotech@gmail.com</string>
+
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in_short">Sign In</string>
+    <string name="action_sign_in">Login</string>
+    <string name="permission_rationale">Contacts permissions are needed for providing email</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="foget_pass">Forget Password?</string>
+    <string name="signup">SignUp</string>
+    <string name="name">Name</string>
+    <string name="contact">Phone</string>
+    <string name="gender">Gender</string>
+    <string name="dob">Date of Birth</string>
+    <string name="doj">Date of Joining</string>
+    <string name="address">Address</string>
+    <string name="teacher">Quiz first</string>
+    <string name="category">M.C.Q</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="subject">Concept</string>
+    <string name="OurPlacement">Our Placement</string>
+    <string name="codingproblem">Coding Problem</string>
+    <string name="quiz">Test Your Knowledge</string>
+    <string name="rank">Rank</string>
+    <string name="total">Total Point</string>
+    <string name="mobile">Mobile Number</string>
+    <string name="top_result">Top Result</string>
+    <string name="exam_name">Exam Name</string>
+    <string name="general_info">Please read these instructions carefully. A candidate who breaches any of the Examination Regulations will be liable to disciplinary action including (but not limited to) suspension or expulsion from the University.</string>
+    <string name="timing_info">·         Examinations will be conducted during the allocated times shown in the examination timetable.  ·         The examination hall will be open for admission 10 minutes before the time scheduled for the commencement of the examination. You are to find your allocated seat but do NOT turn over the question paper until instructed at the time of commencement of the examination.  ·         You will not be admitted for the examination after one hour of the commencement of the examination.</string>
+    <string name="personal_belonging_info">All your personal belongings (such as bags, pouches, ear/headphones, laptops etc.) must be placed at the designated area outside the examination hall. Please do not bring any valuable belongings except the essential materials required for the examinations.  Any unauthorised materials, such as books, paper, documents, pictures and electronic devices with communication and/or storage capabilities such as tablet PC, laptop, smart watch, portable audio/video/gaming devices etc. are not to be brought into the examination hall. ·         Handphones brought into the examination hall must be switched off at ALL times. If your handphone is found to be switched on in the examination hall, the handphone will be confiscated and retained for investigation of possible violation of regulations.  ·         Photography is NOT allowed in the examination hall at ALL times.  ·         All materials and/or devices which are found in violation of any examination regulations will be confiscated.  ·         The University will not be responsible for the loss or damage of any belongings in or outside the examination hall.</string>
+    <string name="start_examination">·     Do NOT turn over the question paper placed on your desk until instructed to do so at the time of commencement of the examination.  ·         Please place your identification documents (such as matric card, identity card, passport, driving licence or EZ-Link concession card) at the top right corner of your examination desk for the marking of attendance and verification of identity during the examination.  ·         Please check that you have the correct question paper and read the instructions printed on your examination question paper carefully.  ·         All examinations are anonymous. Therefore, do not write your name on the answer book. You should write only your matriculation number, correctly and legibly, in the space provided on the cover of each answer book. Providing incorrect/illegible matriculation number could risk your answer book being considered void.</string>
+    <string name="exam_duration">You are not allowed to communicate by word of mouth or otherwise with other candidates (this includes the time when answer scripts are being collected). Please raise your hand if you wish to communicate with an invigilator. ·         Unless granted permission by an invigilator, you are not allowed to leave your seat.  Once you have entered the examination hall, you will not be allowed to leave the hall until one hour             after the examination has commenced.  If, for any reason, you are given permission to leave the hall temporarily, you must be accompanied             by an invigilator throughout your absence from the examination hall. You are required to leave              your handphone on your desk when you leave the hall temporarily. ·         All answers, with the exception of graphs, sketches, diagrams, etc. should be written in black or blue pen, unless otherwise specified. Answers written in pencil will not be marked. The blank pages in the answer book are to be used only for candidates\' rough work. Solutions or any other materials written on these blank pages will not be marked.  ·         Do not write on, mark, highlight or deface any reference materials provided for the examination. If found doing so, the reference materials will be removed from your use for the rest of the examination and you will be made to pay for the cost of the materials that have to be replaced.</string>
+    <string name="end_examination">·       You are NOT allowed to leave the examination hall during the last 15 minutes of the examination and during the collection of the answer scripts. All candidates must remain seated throughout this period for invigilators to properly account for all answer scripts to be collected.  ·      Do NOT continue to write after the examination has ended. You are to remain seated quietly while your answer scripts are being collected and counted.  ·       No papers, used or unused, may be removed from the examination hall. You may take your own question paper with you unless otherwise instructed.  ·       You are to stay in the examination hall until the Chief Invigilator has given the permission to leave. Do NOT talk until you are outside of the examination hall.  ·       You are responsible to ensure that your answer scripts are submitted at the end of the examination. If you are present for the examination and do not submit your answer script, you will be deemed to have sat for and failed the examination concerned. Any unauthorised removal of answer script or part of answer script from the examination hall would deem the answer script as null and void.  ·      Once dismissed, you should leave the examination hall quickly and quietly. Remember to take your personal belongings with you.</string>
+    <string name="start">Start</string>
+    <string name="update">Update</string>
+    <string name="more_coin">Get daily bonus</string>
+    <string name="Get">Get Coin</string>
+    <string name="get_spin">Spin to get coins</string>
+    <string name="single_player">2 Player</string>
+    <string name="multiplier">4 Player</string>
+    <string name="play_quiz">Play Quiz</string>
+    <string name="referal_text">Refer.Views Advts. Earn</string>
+    <string name="referal">Refer the AdsApp to your friends and \n family and earn more coins just by share \n and refer this code.</string>
+    <string name="referal_code">cffp031QDE</string>
+    <string name="action_search">searching</string>
+    <string name="wallet_balance">Get More Coins Your wallet </string>
+    <string name="city">City</string>
+    <string name="connection_error">Oops! No Internet. \n Please check your connection</string>
+    <string name="resend_otp">resend otp</string>
+    <string name="create_signup">Create a new account?</string>
+    <string name="new_notication">All New Notification</string>
+    <string name="overall_ranking">All Over Ranking</string>
+    <string name="answer">Answer</string>
+    <string name="get_coins">Get More Coins</string>
+    <string name="date_of_birth">Date Of Birth</string>
+
+</resources>

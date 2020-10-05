@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dollop.placementadda.activity.QuizPlayDetailsActivity">
+
+    <include layout="@layout/tool_bar" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/tool_bar"
+    android:layout_above="@+id/playDuelQuizBtn">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:weightSum="2"
+        android:id="@+id/main2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/text_pading_8">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ourImageView"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:src="@drawable/ic_user"
+                android:layout_gravity="center"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1dp"/>
+
+            <TextView
+                android:id="@+id/ourNameTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:padding="@dimen/text_pading_8" />
+
+            <TextView
+                android:id="@+id/ourCityTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:padding="@dimen/text_pading_8" />
+
+            <TextView
+                android:id="@+id/ourGenderTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="gone"
+                android:padding="@dimen/text_pading_8" />
+        </LinearLayout>
+
+      <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+          android:layout_marginTop="@dimen/_24sdp"
+          android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/text_pading_8">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/otherIv"
+                android:layout_width="@dimen/_90sdp"
+                android:layout_height="@dimen/_90sdp"
+                android:src="@drawable/ic_user"
+                android:layout_gravity="center"
+                app:civ_border_color="@color/colorPrimary"
+                app:civ_border_width="1dp" />
+
+            <TextView
+                android:id="@+id/otherNameTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:padding="@dimen/text_pading_8" />
+
+
+          <TextView
+                android:id="@+id/otherGenderTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+              android:visibility="gone"
+                android:padding="@dimen/text_pading_8" />
+          <TextView
+              android:id="@+id/otherCityTv"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+
+              android:padding="@dimen/text_pading_8" />
+      </LinearLayout>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/main2"
+    android:id="@+id/mainId4"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/text_pading_8"
+        android:id="@+id/threeplayer_layout"
+        >
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/otherSecondIv"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:src="@drawable/ic_user"
+            android:layout_gravity="center"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/otherSecondNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:padding="@dimen/text_pading_8" />
+
+
+        <TextView
+            android:id="@+id/otherSecondGenderTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="@dimen/text_pading_8" />
+        <TextView
+            android:id="@+id/otherSecondCityTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:padding="@dimen/text_pading_8" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/_24sdp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/text_pading_8"
+        android:id="@+id/fourplayer_layout"
+        android:visibility="gone">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/otherthirdIv"
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_90sdp"
+            android:src="@drawable/ic_user"
+            android:layout_gravity="center"
+            app:civ_border_color="@color/colorPrimary"
+            app:civ_border_width="1dp" />
+
+        <TextView
+            android:id="@+id/otherthirdNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:padding="@dimen/text_pading_8" />
+
+        <TextView
+            android:id="@+id/otherthirdGenderTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="gone"
+            android:padding="@dimen/text_pading_8" />
+        <TextView
+            android:id="@+id/otherthirdCityTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+
+            android:padding="@dimen/text_pading_8" />
+    </LinearLayout>
+
+</LinearLayout>
+    </LinearLayout>
+</ScrollView>
+    <Button
+        android:id="@+id/playDuelQuizBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:text="@string/play_quiz"
+        android:padding="@dimen/text_pading_8"
+        android:textSize="16dp" />
+
+</RelativeLayout>

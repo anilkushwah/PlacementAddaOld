@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ff2d46</color>
+    <color name="colorprimary_dark">#383C3B</color>
+    <color name="coloraccent">#607D8B</color>
+    <color name="custom_color">#383C3B</color>
+    <color name="colortransprent">#87eeeeee</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#757575</color>
+    <color name="divider">#40BDBDBD</color>
+    <color name="list_divider">#d9d9d9</color>
+
+    <color name="level_0">#1abc9c</color>
+    <color name="level_2">#35e67e22</color>
+    <color name="level_3">#40f54238</color>
+    <color name="level_5">#402ecc71</color>
+    <color name="level_7">#ffd8f3</color>
+    <color name="level_6">#d1d2fa</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="gray">#90cFE0B2</color>
+    <color name="red">#f7f41124</color>
+    <color name="colordollop">#f7f41124</color>
+    <color name="green">#f736c231</color>
+    <color name="grayss">#e6e6e6</color>
+    <color name="cardview">#f2f2f2</color>
+    <color name="item_cardview">#eeeeee</color>
+    <color name="card_background">#EBEBEB</color>
+    <color name="grey">#9d9d9d</color>
+    <color name="redbuttonbackgroud">#fe0023</color>
+    <color name="cardview_dark_backgroundd">#000000</color>
+    <color name="cast_expanded_controller_ad_label_background_color">#eeeeee</color>
+    <!-- dots active colors -->
+    <!--new theme color-->
+
+
+</resources>

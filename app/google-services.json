@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "143224891857",
+    "firebase_url": "https://quizdollop.firebaseio.com",
+    "project_id": "quizdollop",
+    "storage_bucket": "quizdollop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143224891857:android:ca6e321a07fe7a8c",
+        "android_client_info": {
+          "package_name": "com.dollop.placementadda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143224891857-p7j26ur3dksi423ii2g4dfh0sccdieel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBegqUtBx9biIKxqz2Obujwzys7QpJ8PCU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
