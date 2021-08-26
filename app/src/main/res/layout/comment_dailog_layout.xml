@@ -14,20 +14,24 @@
     android:background="#EFEFEF">
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/relativeLayoutId"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/comment_recycleview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tool_bar"
-            android:layout_margin="@dimen/_4sdp"
-            android:layout_marginTop="@dimen/_10sdp"
-            android:background="#EFEFEF"
             android:layout_above="@+id/bottumlayout"
+
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:background="#EFEFEF"
             android:scrollbars="vertical" />
 
 
@@ -43,11 +47,11 @@
             android:id="@+id/bottumlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginRight="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
             android:orientation="horizontal"
             android:weightSum="2">
 
@@ -80,7 +84,7 @@
                         android:padding="8dp"
                         android:scaleType="fitCenter" />
 
-                    <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+                    <EditText
                         android:id="@+id/editEmojicon"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -123,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.65">
 
-                <android.support.design.widget.FloatingActionButton
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/send"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

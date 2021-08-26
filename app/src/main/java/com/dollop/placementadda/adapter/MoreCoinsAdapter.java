@@ -1,27 +1,18 @@
 package com.dollop.placementadda.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.LinearLayoutManagerWithSmoothScroller;
 import com.dollop.placementadda.activity.MoreCoinsActivity;
 import com.dollop.placementadda.model.MoreCoinsModel;
-import com.dollop.placementadda.sohel.UserAccount;
 
 import java.util.List;
 

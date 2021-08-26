@@ -3,27 +3,25 @@ package com.dollop.placementadda.activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
 import com.dollop.placementadda.adapter.DiscussionAdapter;
-import com.dollop.placementadda.adapter.TimeLineAdapter;
-import com.dollop.placementadda.adapter.TimeLineCommentAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.DiscussionForumModel;
 import com.dollop.placementadda.model.TimeLineCommentModel;
-import com.dollop.placementadda.model.TimeLineModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
@@ -38,14 +36,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class DiscussionForumActivity extends BaseActivity {
     RecyclerView discussionUserForumRecyclerView;
     ArrayList<DiscussionForumModel> discussionForumModelslist = new ArrayList<>();
-    EmojIconActions emojIcon;
-    EmojiconEditText emojiconEditText;
+  //  EmojIconActions emojIcon;
+    EditText emojiconEditText;
     ImageView emojiImageView, camera;
     View rootView;
     FloatingActionButton send;
@@ -63,12 +59,12 @@ public class DiscussionForumActivity extends BaseActivity {
         discussionUserForumRecyclerView = (RecyclerView) findViewById(R.id.discussionUserForumRecyclerView);
         getPostOnDiscussion();
 
-        emojiconEditText = (EmojiconEditText) findViewById(R.id.editEmojicon);
+        emojiconEditText = (EditText) findViewById(R.id.editEmojicon);
         emojiImageView = (ImageView) findViewById(R.id.emojiIcon);
         camera = (ImageView) findViewById(R.id.camera);
         send = (FloatingActionButton) findViewById(R.id.send);
         rootView = findViewById(R.id.root_view);
-        emojIcon = new EmojIconActions(DiscussionForumActivity.this, rootView, emojiconEditText, emojiImageView);
+      /*  emojIcon = new EmojIconActions(DiscussionForumActivity.this, rootView, emojiconEditText, emojiImageView);
 
         emojIcon.ShowEmojIcon();
         emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.add_icon);
@@ -82,7 +78,7 @@ public class DiscussionForumActivity extends BaseActivity {
             public void onKeyboardClose() {
 
             }
-        });
+        });*/
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

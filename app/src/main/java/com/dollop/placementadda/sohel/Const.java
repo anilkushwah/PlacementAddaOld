@@ -7,14 +7,22 @@ package com.dollop.placementadda.sohel;
 public class Const {
 
     public interface URL {
-       // String HOST_URL = "http://placementsadda.com/DollopQuiz/uploads/userProfilePic/";
-       String HOST_URL = "http://placementsadda.com/DollopQuiz/";
+
+        //Live
+         String HOST_URL = "http://placementsadda.com/DollopQuiz/";
+           String HOST_URL_Fees = "http://placementsadda.com/FeesMangment/";
+        //staging
+//        String HOST_URL = "http://116.75.243.44:8080/DollopQuiz/";
+//        String HOST_URL_Fees = "http://116.75.243.44:8080/FeesMangment/";
+
+        //Images
         String IMAGE_URL = HOST_URL + "uploads/userProfilePic/";
         String GROUP_IMAGES = HOST_URL + "uploads/group/";
         String Banner_Image = HOST_URL + "uploads/banner_images/";
         String Categry_Image = HOST_URL + "uploads/category/";
-        String POST_IMAGE_URL=HOST_URL+"uploads/posts/";
-        //  http://dollopsoft.com/DollopQuiz/uploads/images/1a2cb47c07fcff125c5df8a077d3c801_1.png
+        String POST_IMAGE_URL = HOST_URL + "uploads/posts/";
+
+        //ApiEndPoint
         String SIGNUP_URL = HOST_URL + "SignUp";
         String LOGIN_URL = HOST_URL + "Login";
         String GetCategory = HOST_URL + "getCategory";
@@ -70,9 +78,11 @@ public class Const {
         String SendNotficationToOnlineUser = HOST_URL + "SendNotficationToOnlineUser";
         String getAllPlayerInfoByTableId = HOST_URL + "getAllPlayerInfoByTableId";
         String startGame = HOST_URL + "startGame";
-        String companyList = "http://placementsadda.com/FeesMangment/companyList_api";
-        String studentList = "http://placementsadda.com/FeesMangment/placedStudentListByCompanyId";
-        String imageProgramList = "http://placementsadda.com/DollopQuiz/image_problems";
-        String imageProgramSolution = "http://placementsadda.com/DollopQuiz/image_problem_solution";
+        String imageProgramList = HOST_URL + "image_problems";
+        String imageProgramSolution = HOST_URL + "image_problem_solution";
+
+        //FeesManagement
+        String companyList = HOST_URL_Fees + "companyList_api";
+        String studentList = HOST_URL_Fees + "placedStudentListByCompanyId";
     }
 }

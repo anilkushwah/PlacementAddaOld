@@ -2,8 +2,8 @@ package com.dollop.placementadda.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.QuizTopicActivity;
-import com.dollop.placementadda.activity.SubjectStudyMaterialActivity;
 import com.dollop.placementadda.activity.intro.SubjectTopicActivity;
 import com.dollop.placementadda.model.QuizCategoryModel;
 import com.dollop.placementadda.sohel.Const;

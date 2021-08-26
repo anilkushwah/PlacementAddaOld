@@ -1,15 +1,14 @@
 package com.dollop.placementadda;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.annotation.IntDef;
-import android.support.multidex.MultiDexApplication;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.IntDef;
+import androidx.multidex.MultiDexApplication;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -18,7 +17,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.dollop.placementadda.database.datahelper.QuestionaryListHelper;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.google.android.gms.ads.MobileAds;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

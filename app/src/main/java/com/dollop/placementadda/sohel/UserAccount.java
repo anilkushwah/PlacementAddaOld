@@ -5,8 +5,8 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.telephony.TelephonyManager;
+import androidx.core.app.ActivityCompat;
+
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -105,11 +105,12 @@ public class UserAccount {
     }
 
     public static boolean isEmpty(EditText... arg) {
-        for (int i = 0; i < arg.length; i++) {
-            if (arg[i].getText().length() <= 0) {
-                EditTextPointer = arg[i];
+        for (EditText editText : arg) {
+            if (editText.getText().length() <= 0) {
+                EditTextPointer = editText;
+                errorMessage = "This field can't be empty.!";
                 EditTextPointer.requestFocus();
-                    return false;
+                return false;
             }
 
         }
@@ -192,8 +193,5 @@ public class UserAccount {
         return account;
     }
 
-    public static String getDeviceID(Context cx) {
-        TelephonyManager tManager = (TelephonyManager) cx.getSystemService(Context.TELEPHONY_SERVICE);
-        return tManager.getDeviceId();
-    }
+
 }

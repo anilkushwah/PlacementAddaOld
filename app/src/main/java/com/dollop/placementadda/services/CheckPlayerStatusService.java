@@ -1,23 +1,16 @@
 package com.dollop.placementadda.services;
 
 import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
+
+import androidx.annotation.Nullable;
 
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.dollop.placementadda.notification.Config;
-import com.dollop.placementadda.notification.MyFirebaseInstanceIDService;
 import com.dollop.placementadda.notification.NotificationUtils;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;
-import com.dollop.placementadda.sohel.S;
 
 import org.json.JSONException;
 import org.json.JSONObject;

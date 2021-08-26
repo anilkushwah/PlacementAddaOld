@@ -3,15 +3,14 @@ package com.dollop.placementadda.activity;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.sohel.MarshMallowPermission;
 import com.kyanogen.signatureview.SignatureView;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

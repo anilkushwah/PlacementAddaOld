@@ -1,43 +1,28 @@
 package com.dollop.placementadda.activity.basic;
 
+import static android.Manifest.permission.READ_CONTACTS;
+
 import android.Manifest;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.LoaderManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.Loader;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-
 import android.net.Uri;
-
-import java.io.ByteArrayOutputStream;
-import java.net.URL;
-
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -49,12 +34,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.QuizMainActivity;
@@ -68,6 +57,7 @@ import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
 import com.dollop.placementadda.sohel.SavedData;
 import com.dollop.placementadda.sohel.UserAccount;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
 import com.google.android.play.core.install.InstallState;
@@ -75,23 +65,19 @@ import com.google.android.play.core.install.InstallStateUpdatedListener;
 import com.google.android.play.core.install.model.AppUpdateType;
 import com.google.android.play.core.install.model.InstallStatus;
 import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.firebase.iid.FirebaseInstanceId;
-
-import android.widget.LinearLayout;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginsActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -112,11 +98,34 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
             "foo@example.com:hello", "bar@example.com:world"
     };
     private static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 116;
+    // private AppUpdateManager mAppUpdateManager;
+    private static final int RC_APP_UPDATE = 11;
+    EditText etSignUpName, etSignUpEmail, etSignUpPhone;
+    LinearLayout parentSignUpLayout;
+    Animation uptodown, downtoup;
+    Spinner collegeNameSp;
+    RadioButton maleRB, femaleRB;
+    ScrollView signupScrollView;
+    AppUpdateManager mAppUpdateManager;
+    InstallStateUpdatedListener installStateUpdatedListener = new
+            InstallStateUpdatedListener() {
+                @Override
+                public void onStateUpdate(InstallState state) {
+                    if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                        popupSnackbarForCompleteUpdate();
+                    } else if (state.installStatus() == InstallStatus.INSTALLED) {
+                        if (mAppUpdateManager != null) {
+                            mAppUpdateManager.unregisterListener(installStateUpdatedListener);
+                        }
+                    } else {
+                        Log.e("please check", "InstallStateUpdatedListener: state: " + state.installStatus());
+                    }
+                }
+            };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
-
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -133,19 +142,11 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
     private LinearLayout loginLinearLayout;
     private Button signUploginginBtn;
     private Button signUpBtn;
-    EditText etSignUpName, etSignUpEmail, etSignUpPhone;
-    LinearLayout parentSignUpLayout;
-    Animation uptodown, downtoup;
-    Spinner collegeNameSp;
-    RadioButton maleRB, femaleRB;
-
-    ScrollView signupScrollView;
 
     @Override
     protected int getContentResId() {
         return R.layout.activity_login;
     }
-
 
     @SuppressLint("HardwareIds")
     @Override
@@ -155,7 +156,7 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
         // Set up the login form.
 
         imeiNoStr = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
-
+        SavedData.saveIMEI_NUMBER(imeiNoStr);
         mEmailView = findViewById(R.id.email);
         loginSignUpBtn = findViewById(R.id.loginSignUpBtn);
         signUpLinearLayout = findViewById(R.id.signUpLinearLayout);
@@ -172,9 +173,20 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
         maleRB = findViewById(R.id.maleRB);
         femaleRB = findViewById(R.id.femaleRB);
         signupScrollView = findViewById(R.id.signupScrollView);
-        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
-        SavedData.saveFcmTokenID(refreshedToken);
-        S.E("checkFirebaseString" + refreshedToken);
+        FirebaseApp.initializeApp(activity);
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        S.E("getInstanceId failed" + task.getException());
+                        return;
+                    }
+
+                    String refreshedToken = task.getResult();
+                    SavedData.saveFcmTokenID(refreshedToken);
+
+                });
+
         populateAutoComplete();
 
 
@@ -295,6 +307,7 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
                         Bundle bundle = new Bundle();
                         bundle.putString("mobile_num", etSignUpPhone.getText().toString());
                         bundle.putString("imei_num", imeiNoStr);
+  			bundle.putString("data",jsonObject.getString("data"));
                         intent.putExtras(bundle);
                         startActivity(intent);
                         //   S.I(SignUpActivity.this, OtpVerificationActivity.class, null);
@@ -598,6 +611,100 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
         mEmailView.setAdapter(adapter);
     }
 
+    @Override
+    protected void onStart() {
+
+        mAppUpdateManager = AppUpdateManagerFactory.create(this);
+
+        mAppUpdateManager.registerListener(installStateUpdatedListener);
+
+        mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
+
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+
+                try {
+                    mAppUpdateManager.startUpdateFlowForResult(
+                            appUpdateInfo, AppUpdateType.IMMEDIATE, LoginsActivity.this, RC_APP_UPDATE);
+
+                } catch (IntentSender.SendIntentException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                //CHECK THIS if AppUpdateType.FLEXIBLE, otherwise you can skip
+                popupSnackbarForCompleteUpdate();
+            } else {
+                Log.e("TAG", "checkForAppUpdateAvailability: something else");
+            }
+        });
+        super.onStart();
+    }
+
+    private void popupSnackbarForCompleteUpdate() {
+
+        Snackbar snackbar =
+                Snackbar.make(
+                        findViewById(R.id.llMainLayoutId),
+                        "New app is ready!",
+                        Snackbar.LENGTH_INDEFINITE);
+
+        snackbar.setAction("Install", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mAppUpdateManager != null) {
+                    mAppUpdateManager.completeUpdate();
+                }
+            }
+        });
+
+
+        snackbar.setActionTextColor(getResources().getColor(R.color.colorPrimary));
+        snackbar.show();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mAppUpdateManager != null) {
+            mAppUpdateManager.unregisterListener(installStateUpdatedListener);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_APP_UPDATE) {
+            if (resultCode != RESULT_OK) {
+                Log.e("TAG", "onActivityResult: app download failed");
+                mAppUpdateManager = AppUpdateManagerFactory.create(this);
+
+                mAppUpdateManager.registerListener(installStateUpdatedListener);
+
+                mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
+
+                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                            && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+
+                        try {
+                            mAppUpdateManager.startUpdateFlowForResult(
+                                    appUpdateInfo, AppUpdateType.IMMEDIATE, LoginsActivity.this, RC_APP_UPDATE);
+
+                        } catch (IntentSender.SendIntentException e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
+                        //CHECK THIS if AppUpdateType.FLEXIBLE, otherwise you can skip
+                        popupSnackbarForCompleteUpdate();
+                    } else {
+                        Log.e("TAG", "checkForAppUpdateAvailability: something else");
+                    }
+                });
+            }
+        }
+    }
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -697,6 +804,7 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
             return bitmap;
         }
 
+        @SuppressLint("WrongThread")
         @Override
         protected void onPostExecute(Bitmap result) {
             try {
@@ -727,120 +835,5 @@ public class LoginsActivity extends BaseActivity implements LoaderManager.Loader
             }
         }
     }
-
-    AppUpdateManager mAppUpdateManager;
-    // private AppUpdateManager mAppUpdateManager;
-    private static final int RC_APP_UPDATE = 11;
-
-    @Override
-    protected void onStart() {
-
-        mAppUpdateManager = AppUpdateManagerFactory.create(this);
-
-        mAppUpdateManager.registerListener(installStateUpdatedListener);
-
-        mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
-
-            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-
-                try {
-                    mAppUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo, AppUpdateType.IMMEDIATE, LoginsActivity.this, RC_APP_UPDATE);
-
-                } catch (IntentSender.SendIntentException e) {
-                    e.printStackTrace();
-                }
-
-            } else if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                //CHECK THIS if AppUpdateType.FLEXIBLE, otherwise you can skip
-                popupSnackbarForCompleteUpdate();
-            } else {
-                Log.e("TAG", "checkForAppUpdateAvailability: something else");
-            }
-        });
-        super.onStart();
-    }
-
-    private void popupSnackbarForCompleteUpdate() {
-
-        Snackbar snackbar =
-                Snackbar.make(
-                        findViewById(R.id.llMainLayoutId),
-                        "New app is ready!",
-                        Snackbar.LENGTH_INDEFINITE);
-
-        snackbar.setAction("Install", new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mAppUpdateManager != null) {
-                    mAppUpdateManager.completeUpdate();
-                }
-            }
-        });
-
-
-        snackbar.setActionTextColor(getResources().getColor(R.color.colorPrimary));
-        snackbar.show();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mAppUpdateManager != null) {
-            mAppUpdateManager.unregisterListener(installStateUpdatedListener);
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == RC_APP_UPDATE) {
-            if (resultCode != RESULT_OK) {
-                Log.e("TAG", "onActivityResult: app download failed");
-                mAppUpdateManager = AppUpdateManagerFactory.create(this);
-
-                mAppUpdateManager.registerListener(installStateUpdatedListener);
-
-                mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(appUpdateInfo -> {
-
-                    if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
-                            && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-
-                        try {
-                            mAppUpdateManager.startUpdateFlowForResult(
-                                    appUpdateInfo, AppUpdateType.IMMEDIATE, LoginsActivity.this, RC_APP_UPDATE);
-
-                        } catch (IntentSender.SendIntentException e) {
-                            e.printStackTrace();
-                        }
-
-                    } else if (appUpdateInfo.installStatus() == InstallStatus.DOWNLOADED) {
-                        //CHECK THIS if AppUpdateType.FLEXIBLE, otherwise you can skip
-                        popupSnackbarForCompleteUpdate();
-                    } else {
-                        Log.e("TAG", "checkForAppUpdateAvailability: something else");
-                    }
-                });
-            }
-        }
-    }
-
-    InstallStateUpdatedListener installStateUpdatedListener = new
-            InstallStateUpdatedListener() {
-                @Override
-                public void onStateUpdate(InstallState state) {
-                    if (state.installStatus() == InstallStatus.DOWNLOADED) {
-                        popupSnackbarForCompleteUpdate();
-                    } else if (state.installStatus() == InstallStatus.INSTALLED) {
-                        if (mAppUpdateManager != null) {
-                            mAppUpdateManager.unregisterListener(installStateUpdatedListener);
-                        }
-                    } else {
-                        Log.e("please check", "InstallStateUpdatedListener: state: " + state.installStatus());
-                    }
-                }
-            };
 
 }

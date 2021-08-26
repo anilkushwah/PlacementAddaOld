@@ -3,8 +3,8 @@ package com.dollop.placementadda.adapter;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.ExamInstructionActivity;
 import com.dollop.placementadda.model.ItemSelectedModel;
-import com.dollop.placementadda.model.QuizSubCatModel;
-import com.dollop.placementadda.sohel.S;
 
 import java.util.List;
 

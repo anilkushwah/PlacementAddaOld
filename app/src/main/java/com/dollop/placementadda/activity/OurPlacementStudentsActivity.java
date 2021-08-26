@@ -1,12 +1,11 @@
 package com.dollop.placementadda.activity;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.CompanyLIstAdapter;
 import com.dollop.placementadda.adapter.StudentListAdapter;
 import com.dollop.placementadda.model.PlacedStudentModel;
 import com.dollop.placementadda.sohel.Const;
@@ -34,8 +33,10 @@ public class OurPlacementStudentsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setToolbarWithBackButton("Our Placements");
         String companyId = getIntent().getExtras().getString("companyId");
+        String companyName = getIntent().getExtras().getString("companyName");
+
+        setToolbarWithBackButton(companyName);
         rvCompanyNameId = (RecyclerView) findViewById(R.id.rvCompanyNameId);
         rvCompanyNameId.setLayoutManager(new GridLayoutManager(this, 2));
         getStudentsNames(companyId);
@@ -52,9 +53,9 @@ public class OurPlacementStudentsActivity extends BaseActivity {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getInt("status") == 200) {
-                        S.E("statusStudentList::"+response);
-                      JSONArray jsonArray = jsonObject.getJSONArray("data");
-                       for (int i = 0; i < jsonArray.length(); i++) {
+                        S.E("statusStudentList::" + response);
+                        JSONArray jsonArray = jsonObject.getJSONArray("data");
+                        for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject1 = jsonArray.getJSONObject(i);
                             PlacedStudentModel companyModel = new PlacedStudentModel();
 

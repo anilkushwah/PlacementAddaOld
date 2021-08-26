@@ -5,13 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Base64;
-import android.util.Log;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -19,10 +16,7 @@ import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.CreateGroupAdapter;
-import com.dollop.placementadda.adapter.SelectThreePlayerAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.dollop.placementadda.model.CreateGroupModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
@@ -31,16 +25,12 @@ import com.dollop.placementadda.sohel.S;
 import com.dollop.placementadda.sohel.SavedData;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class QuizPlayDetailsActivity extends BaseActivity {
     String uid;

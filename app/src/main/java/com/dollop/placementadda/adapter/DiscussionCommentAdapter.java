@@ -5,21 +5,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -28,18 +22,14 @@ import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.CommentActivity;
-import com.dollop.placementadda.activity.DiscussionForumActivity;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.DiscussionCommentModel;
 import com.dollop.placementadda.model.DiscussionCommentraiting_Model;
-import com.dollop.placementadda.model.DiscussionForumModel;
-import com.dollop.placementadda.model.TimeLineCommentModel;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
-import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -50,15 +40,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+
 
 public class DiscussionCommentAdapter extends RecyclerView.Adapter<DiscussionCommentAdapter.MyViewHolder> {
     Context context;
     private List<DiscussionCommentModel> timeLineModelList;
     int likeCount;
     String post_id;RecyclerView comment_recycleview;
-    EmojiconEditText emojiconEditText;
+    EditText emojiconEditText;
     private static final int DELAY_SHOWING_SMILE_PANEL = 200;
     ArrayList<DiscussionCommentraiting_Model> discussionCommentraiting_models;
     public class MyViewHolder extends RecyclerView.ViewHolder {

@@ -1,20 +1,18 @@
 package com.dollop.placementadda.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.model.LeaderBoardModel;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
-import com.dollop.placementadda.sohel.SavedData;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

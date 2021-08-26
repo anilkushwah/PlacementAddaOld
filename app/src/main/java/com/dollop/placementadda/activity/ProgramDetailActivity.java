@@ -1,20 +1,15 @@
 package com.dollop.placementadda.activity;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
@@ -25,7 +20,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -35,30 +29,20 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.ProgramListAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.dollop.placementadda.model.ProgramListModel;
 import com.dollop.placementadda.sohel.Const;
-import com.dollop.placementadda.sohel.Helper;
-import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
 import com.dollop.placementadda.sohel.multipart.VolleyMultipartRequest;
 import com.dollop.placementadda.sohel.multipart.VolleySingleton;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
-
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class ProgramDetailActivity extends BaseActivity {
     ImageView ivProgramDetailImageId;

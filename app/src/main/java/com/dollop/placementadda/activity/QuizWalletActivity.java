@@ -7,11 +7,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.Toolbar;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -32,11 +34,19 @@ import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
 import com.dollop.placementadda.sohel.SavedData;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,13 +56,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class QuizWalletActivity extends BaseActivity implements RewardedVideoAdListener {
+public class QuizWalletActivity extends BaseActivity   {
     Toolbar toolBar;
     ImageView freeVideoBtn;
     ImageView sharedBtn;
     ImageView moreCoinsBtn;
     TextView totalBalance;
-    private RewardedVideoAd mRewardedVideoAd;
+    private RewardedAd mRewardedAd;
+    boolean flag=false;
     LinearLayout watchVideoLayout;
     ProgressDialog progressDialog;
     private final static int REQUEST_READ_PHONE_STATE = 1;
@@ -73,9 +84,39 @@ public class QuizWalletActivity extends BaseActivity implements RewardedVideoAdL
         moreCoinsBtn = (ImageView) findViewById(R.id.moreCoinsBtn);
         totalBalance = (TextView) findViewById(R.id.totalBalance);
         watchVideoLayout=findViewById(R.id.watchVideoLayout);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
 
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        RewardedAd.load(this, "ca-app-pub-3496220705060137/5157183364",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d("TAG", loadAdError.getMessage());
+                        mRewardedAd = null;
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                        progressDialog.dismiss();
+                        mRewardedAd = rewardedAd;
+                        if(flag){
+                            mRewardedAd.show(QuizWalletActivity.this, new OnUserEarnedRewardListener() {
+                                @Override
+                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                    flag=false;
+                                    AddCoin("10", "Watch a video");
+                                }
+                            });
+                        }
+                        Log.d("TAG", "Ad was loaded.");
+                    }
+                });
+
 
         String abc = SavedData.getCoins();
 
@@ -154,74 +195,24 @@ public class QuizWalletActivity extends BaseActivity implements RewardedVideoAdL
     }
 
     private void loadRewardedVideoAd() {
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new  AdRequest.Builder().build());
-    }//ca-app-pub-3940256099942544/5224354917
+        flag=true;
+        if (mRewardedAd == null) {
+            progressDialog.setMessage("Loading..."); // Setting Message
+            progressDialog.setTitle("Video loading"); // Setting Title
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+            progressDialog.show(); // Display Progress Dialog
+            progressDialog.setCancelable(false);
+        } else
+            mRewardedAd.show(this, new OnUserEarnedRewardListener() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    // Handle the reward.
 
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-        progressDialog.dismiss();
-//        Toast.makeText(this, "onRewardedVideoAdLeftApplication",
-//                Toast.LENGTH_SHORT).show();
+                    AddCoin("10", "Watch a video");
+                }
+            });
     }
 
-    @Override
-    public void onRewardedVideoAdClosed() {
-//      progressDialog.dismiss();
-        /*   Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-         */    }
-
-    @Override
-    public void onRewarded(RewardItem rewardItem) {
-        AddCoin("10", "Watch a video");
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int errorCode) {
-       // progressDialog.dismiss();
-        /*   Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();*/
-    }
-
-    @Override
-    public void onRewardedVideoAdLoaded() {
-        if (mRewardedVideoAd.isLoaded()) {
-            mRewardedVideoAd.show();
-        }
-//      progressDialog.dismiss();
-/*
-        Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-*/
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-    }
-
-    @Override
-    public void onRewardedVideoCompleted() {
-        getWalletAmount();
-    }
-
-    @Override
-    public void onResume() {
-        mRewardedVideoAd.resume(this);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        mRewardedVideoAd.pause(this);
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mRewardedVideoAd.destroy(this);
-        super.onDestroy();
-    }
 
     private void getWalletAmount() {
         new JSONParser(QuizWalletActivity.this).parseVollyStringRequest(Const.URL.GET_WALLET, 1, getParams(), new Helper() {
@@ -285,6 +276,7 @@ public class QuizWalletActivity extends BaseActivity implements RewardedVideoAdL
                     S.E("get Amount after ads"+response);
                     S.E("add amount after ads param"+getCommentParams(amount,Status));
                     if (jsonObject.getString("message").equals("success")) {
+                        getWalletAmount();
                         ConfirmPopup();
                     } else {
                         S.T(QuizWalletActivity.this, jsonObject.getString("message"));

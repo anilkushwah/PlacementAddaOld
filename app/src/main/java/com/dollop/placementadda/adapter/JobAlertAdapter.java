@@ -1,38 +1,26 @@
 package com.dollop.placementadda.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.MediaController;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.Job_Alert_Detail_Activity;
-import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.JobAlertModel;
-import com.dollop.placementadda.model.LeaderBoardModel;
 import com.dollop.placementadda.model.MainFragModel;
-import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class JobAlertAdapter extends RecyclerView.Adapter<JobAlertAdapter.MyViewHolder> {
     private int postionForselected = 0;

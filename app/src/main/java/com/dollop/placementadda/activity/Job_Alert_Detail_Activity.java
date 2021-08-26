@@ -1,13 +1,10 @@
 package com.dollop.placementadda.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
@@ -15,8 +12,6 @@ import com.dollop.placementadda.activity.basic.BaseActivity;
 import com.dollop.placementadda.model.JobAlertModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.S;
-
-import java.util.ArrayList;
 
 public class Job_Alert_Detail_Activity extends BaseActivity {
     TextView job_Title_tv, joblocation, job_type, description_tv, workexpriance_tv, education_tv, contactdetail_tv, View_btn;

@@ -2,7 +2,7 @@ package com.dollop.placementadda.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v4.view.PagerAdapter;
+import androidx.viewpager.widget.PagerAdapter;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,8 +65,12 @@ public class QuizQuetionaryAdapter extends PagerAdapter {
         ints.add(R.id.rbOption3Id);
         ints.add(R.id.rbOption4Id);
         ints.add(R.id.rbOption5Id);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            tvQuetionId.setText(Html.fromHtml(questionaryModels.get(position).getQuestionstr(), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            tvQuetionId.setText(Html.fromHtml(questionaryModels.get(position).getQuestionstr()));
+        }
 
-        tvQuetionId.setText(Html.fromHtml(questionaryModels.get(position).getQuestionstr()));
         rbOPtion1Id.setText(questionaryModels.get(position).getOption1());
         rbOPtion2Id.setText(questionaryModels.get(position).getOption2());
         rbOPtion3Id.setText(questionaryModels.get(position).getOption3());

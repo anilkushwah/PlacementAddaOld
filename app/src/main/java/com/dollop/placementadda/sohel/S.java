@@ -2,7 +2,6 @@ package com.dollop.placementadda.sohel;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,8 +10,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -25,7 +24,6 @@ import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.QuizMainActivity;
 import com.dollop.placementadda.activity.QuizPlayDetailsActivity;
 import com.dollop.placementadda.activity.QuizQuestionaryActivity;
-import com.dollop.placementadda.activity.QuizesActivity;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.squareup.picasso.Picasso;
 

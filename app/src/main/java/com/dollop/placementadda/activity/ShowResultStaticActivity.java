@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.cardview.widget.CardView;
+import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -34,7 +34,6 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -56,6 +55,7 @@ public class ShowResultStaticActivity extends BaseActivity implements OnChartVal
     private float correctAns = 0;
     private float notAttemp = 0;
     private float incorrectAns = 0;
+    private String ActivityCheck;
 
     @Override
     protected int getContentResId() {
@@ -75,6 +75,7 @@ public class ShowResultStaticActivity extends BaseActivity implements OnChartVal
         cdLeaderBoardId = findViewById(R.id.cdLeaderBoardId);
         setToolbarWithBackButton("Statics");
         SelectedListModel selectedListModel = (SelectedListModel) getIntent().getSerializableExtra("key_list");
+        ActivityCheck =  getIntent().getStringExtra("ActivityCheck");
         questionaryList = selectedListModel.getQuestionaryModels();
 
 
@@ -82,7 +83,7 @@ public class ShowResultStaticActivity extends BaseActivity implements OnChartVal
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                /* bundle.putString("quiz_id", getIntent().getStringExtra("quiz_id"));*/
+
                 bundle.putSerializable("key_list", (SelectedListModel) getIntent().getSerializableExtra("key_list"));
                 S.I(ShowResultStaticActivity.this, AnswerSheetActivity.class, bundle);
 
@@ -105,10 +106,10 @@ public class ShowResultStaticActivity extends BaseActivity implements OnChartVal
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-
+                bundle.putString("ActivityCheck", ActivityCheck);
                 bundle.putSerializable("key_list", (SelectedListModel) getIntent().getSerializableExtra("key_list"));
                 S.I(ShowResultStaticActivity.this, SimilarTestActivity.class, bundle);
-
+                finish();
             }
         });
         PieChart pieChart = (PieChart) findViewById(R.id.piechart);
@@ -130,118 +131,118 @@ public class ShowResultStaticActivity extends BaseActivity implements OnChartVal
 
         }
 
-if(notAttemp==questionaryList.size()){
-    ArrayList<Entry> yvalues = new ArrayList<Entry>();
+        if (notAttemp == questionaryList.size()) {
+            ArrayList<Entry> yvalues = new ArrayList<Entry>();
 
-    yvalues.add(new Entry(notAttemp, 2));
-
-
-    PieDataSet dataSet = new PieDataSet(yvalues, "");
-
-    ArrayList<String> xVals = new ArrayList<String>();
+            yvalues.add(new Entry(notAttemp, 2));
 
 
-    xVals.add("Not Attempt");
+            PieDataSet dataSet = new PieDataSet(yvalues, "");
 
-    PieData data = new PieData(xVals, dataSet);
-    data.setValueFormatter(new PercentFormatter());
-    pieChart.setData(data);
-    pieChart.setDescription("Your result");
-
-    pieChart.setDrawHoleEnabled(true);
-    pieChart.setTransparentCircleRadius(25f);
-    pieChart.setHoleRadius(25f);
-
-    dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-    data.setValueTextSize(13f);
-    data.setValueTextColor(Color.WHITE);
-    pieChart.setOnChartValueSelectedListener(this);
-
-    pieChart.animateXY(1400, 1400);
+            ArrayList<String> xVals = new ArrayList<String>();
 
 
-}else {
-    ArrayList<Entry> yvalues = new ArrayList<Entry>();
-    yvalues.add(new Entry(correctAns, 0));
-    yvalues.add(new Entry(incorrectAns, 1));
-    yvalues.add(new Entry(notAttemp, 2));
+            xVals.add("Not Attempt");
+
+            PieData data = new PieData(xVals, dataSet);
+            data.setValueFormatter(new PercentFormatter());
+            pieChart.setData(data);
+            pieChart.setDescription("Your result");
+
+            pieChart.setDrawHoleEnabled(true);
+            pieChart.setTransparentCircleRadius(25f);
+            pieChart.setHoleRadius(25f);
+
+            dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+            data.setValueTextSize(13f);
+            data.setValueTextColor(Color.WHITE);
+            pieChart.setOnChartValueSelectedListener(this);
+
+            pieChart.animateXY(1400, 1400);
 
 
-    PieDataSet dataSet = new PieDataSet(yvalues, "");
+        } else {
+            ArrayList<Entry> yvalues = new ArrayList<Entry>();
+            yvalues.add(new Entry(correctAns, 0));
+            yvalues.add(new Entry(incorrectAns, 1));
+            yvalues.add(new Entry(notAttemp, 2));
 
-    ArrayList<String> xVals = new ArrayList<String>();
 
-    xVals.add("Correct");
-    xVals.add("Incorrect");
-    xVals.add("Not Attempt");
+            PieDataSet dataSet = new PieDataSet(yvalues, "");
 
-    PieData data = new PieData(xVals, dataSet);
-    data.setValueFormatter(new PercentFormatter());
-    pieChart.setData(data);
-    pieChart.setDescription("Your result");
+            ArrayList<String> xVals = new ArrayList<String>();
 
-    pieChart.setDrawHoleEnabled(true);
-    pieChart.setTransparentCircleRadius(25f);
-    pieChart.setHoleRadius(25f);
+            xVals.add("Correct");
+            xVals.add("Incorrect");
+            xVals.add("Not Attempt");
 
-    dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-    data.setValueTextSize(13f);
-    data.setValueTextColor(Color.DKGRAY);
-    pieChart.setOnChartValueSelectedListener(this);
+            PieData data = new PieData(xVals, dataSet);
+            data.setValueFormatter(new PercentFormatter());
+            pieChart.setData(data);
+            pieChart.setDescription("Your result");
 
-    pieChart.animateXY(1400, 1400);
-}
+            pieChart.setDrawHoleEnabled(true);
+            pieChart.setTransparentCircleRadius(25f);
+            pieChart.setHoleRadius(25f);
+
+            dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+            data.setValueTextSize(13f);
+            data.setValueTextColor(Color.DKGRAY);
+            pieChart.setOnChartValueSelectedListener(this);
+
+            pieChart.animateXY(1400, 1400);
+        }
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.PUSH_NOTIFICATION));
         BroadcastReceiver broadcastReceiver = S.LocalBroadcastReciver(ShowResultStaticActivity.this);
         LocalBroadcastManager.getInstance(this).registerReceiver(broadcastReceiver,
                 new IntentFilter(Config.QuizRequest));
- LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
                 new IntentFilter(Config.QuizResult));
 
-        if (com.dollop.placementadda.sohel.SavedData.getNotificationRequestForGameStart().equals("true")) {
+        if (SavedData.getNotificationRequestForGameStart().equals("true")) {
             S.E("checkIts  Come");
 
-                try {
-                    JSONObject jsonObject = new JSONObject(com.dollop.placementadda.sohel.SavedData.getNotificationJson());
-                    JSONObject jsonObject1 = jsonObject.getJSONObject("msg");
-                    userProfilePic = jsonObject1.getString("userProfilePic");
-                    userName = jsonObject1.getString("userName");
+            try {
+                JSONObject jsonObject = new JSONObject(SavedData.getNotificationJson());
+                JSONObject jsonObject1 = jsonObject.getJSONObject("msg");
+                userProfilePic = jsonObject1.getString("userProfilePic");
+                userName = jsonObject1.getString("userName");
 
-                    Log.e("receiver", "Got message: " + com.dollop.placementadda.sohel.SavedData.getNotificationJson());
+                Log.e("receiver", "Got message: " + SavedData.getNotificationJson());
 
-                    final Dialog dialog = new Dialog(ShowResultStaticActivity.this);
-                    dialog.setContentView(R.layout.winner_popup);
-                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                    dialog.setCanceledOnTouchOutside(false);
-                    CircleImageView comment_user_circullerimage;
-                    ImageView cancel_img, full_image;
-                    Button continue_btn;
-                    TextView CommentUserName_tv;
-                    /* GifView gifView1 = (GifView) dialog.findViewById(R.id.gif1);*/
-                    comment_user_circullerimage = (CircleImageView) dialog.findViewById(R.id.comment_user_circullerimage);
-                    CommentUserName_tv = (TextView) dialog.findViewById(R.id.CommentUserName_tv);
-                    continue_btn = (Button) dialog.findViewById(R.id.continue_btn);
-                    CommentUserName_tv.setText(userName);
+                final Dialog dialog = new Dialog(ShowResultStaticActivity.this);
+                dialog.setContentView(R.layout.winner_popup);
+                dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                dialog.setCanceledOnTouchOutside(false);
+                CircleImageView comment_user_circullerimage;
+                ImageView cancel_img, full_image;
+                Button continue_btn;
+                TextView CommentUserName_tv;
+                /* GifView gifView1 = (GifView) dialog.findViewById(R.id.gif1);*/
+                comment_user_circullerimage = (CircleImageView) dialog.findViewById(R.id.comment_user_circullerimage);
+                CommentUserName_tv = (TextView) dialog.findViewById(R.id.CommentUserName_tv);
+                continue_btn = (Button) dialog.findViewById(R.id.continue_btn);
+                CommentUserName_tv.setText(userName);
 
-                    if (!userProfilePic.equals("") && !userProfilePic.equals("null")) {
-                        Picasso.with(ShowResultStaticActivity.this).
-                                load(Const.URL.IMAGE_URL + userProfilePic)
-                                .into(comment_user_circullerimage);
+                if (!userProfilePic.equals("") && !userProfilePic.equals("null")) {
+                    Picasso.with(ShowResultStaticActivity.this).
+                            load(Const.URL.IMAGE_URL + userProfilePic)
+                            .into(comment_user_circullerimage);
+
+                }
+                continue_btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                        // S.I_clear(ShowResultStaticActivity.this, QuizMainActivity.class, null);
 
                     }
-                    continue_btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            dialog.dismiss();
-                          // S.I_clear(ShowResultStaticActivity.this, QuizMainActivity.class, null);
-
-                        }
-                    });
+                });
 
 
-                    dialog.show();
+                dialog.show();
 
             } catch (Exception e) {
                 S.E("checkNotification2 Exception" + e);
@@ -295,7 +296,7 @@ if(notAttemp==questionaryList.size()){
                     @Override
                     public void onClick(View v) {
                         dialog.dismiss();
-                      //  S.I_clear(ShowResultStaticActivity.this, QuizMainActivity.class, null);
+                        //  S.I_clear(ShowResultStaticActivity.this, QuizMainActivity.class, null);
 
                     }
                 });

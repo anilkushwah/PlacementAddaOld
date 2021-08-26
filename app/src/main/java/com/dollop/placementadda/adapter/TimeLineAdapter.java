@@ -2,15 +2,16 @@ package com.dollop.placementadda.adapter;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
@@ -40,8 +41,7 @@ import java.util.Map;
 
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+
 
 
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.MyViewHolder> {
@@ -50,7 +50,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.MyView
     int likeCount;
     String post_id;
     RecyclerView comment_recycleview;
-    EmojiconEditText emojiconEditText;
+    EditText emojiconEditText;
     private static final int DELAY_SHOWING_SMILE_PANEL = 200;
     ArrayList<TimeLineCommentModel> timeLineCommentModelslist = new ArrayList<>();
     private RelativeLayout relativeLayoutId;
@@ -238,7 +238,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.MyView
 
     public void CommentPopup(final String post_id) {
         notifyDataSetChanged();
-        EmojIconActions emojIcon;
+        //EmojIconActions emojIcon;
         View rootView;
         FloatingActionButton send;
         final Dialog dialog = new Dialog(context);
@@ -246,7 +246,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.MyView
         dialog.setContentView(R.layout.comment_dailog_layout);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setCanceledOnTouchOutside(false);
-        emojiconEditText = (EmojiconEditText) dialog.findViewById(R.id.editEmojicon);
+        emojiconEditText = (EditText) dialog.findViewById(R.id.editEmojicon);
         send = (FloatingActionButton) dialog.findViewById(R.id.send);
         rootView = dialog.findViewById(R.id.root_view);
         ImageView cancel_img, emojiImageView;
@@ -276,7 +276,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.MyView
             }
         });
 
-        emojIcon = new EmojIconActions(context, rootView, emojiconEditText, emojiImageView);
+     /*   emojIcon = new EmojIconActions(context, rootView, emojiconEditText, emojiImageView);
         emojIcon.ShowEmojIcon();
         emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
         emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
@@ -289,7 +289,7 @@ public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineAdapter.MyView
             public void onKeyboardClose() {
                 Log.e("", "Keyboard closed");
             }
-        });
+        });*/
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

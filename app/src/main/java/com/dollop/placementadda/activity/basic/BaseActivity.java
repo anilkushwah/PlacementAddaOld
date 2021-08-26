@@ -1,42 +1,22 @@
 package com.dollop.placementadda.activity.basic;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.NavUtils;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.ContextThemeWrapper;
+import androidx.core.app.NavUtils;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.dollop.placementadda.AppController;
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.QuizMainActivity;
-import com.dollop.placementadda.activity.QuizQuestionaryActivity;
-import com.dollop.placementadda.notification.Config;
-import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Sohel Technology on 2/23/2016.

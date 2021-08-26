@@ -1,24 +1,19 @@
 package com.dollop.placementadda.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Html;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.QuizesActivity;
 import com.dollop.placementadda.model.StudyMaterialModel;
-import com.dollop.placementadda.sohel.Const;
-import com.dollop.placementadda.sohel.S;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -87,8 +82,12 @@ public class StudyMaterialAdapter extends RecyclerView.Adapter<StudyMaterialAdap
         final StudyMaterialModel StudyMaterialModel = StudyMaterialModelList.get(position);
         holder.tvHeaderID.setText(StudyMaterialModel.getSubjectTheoryHeading());
         String htlmLoadData = StudyMaterialModel.getSubjectTheoryContant();
-
-        holder.tvDetailId.loadData(htlmLoadData, "text/html", "UTF-8");
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            holder.tvDetailId.setText(Html.fromHtml(StudyMaterialModelList.get(position).getSubjectTheoryContant(), Html.FROM_HTML_MODE_LEGACY));
+        } else {
+            holder.tvDetailId.setText(Html.fromHtml(StudyMaterialModelList.get(position).getSubjectTheoryContant()));
+        }
+     //   holder.tvDetailId.loadData(htlmLoadData, "text/html", "UTF-8");
 
     }
 
@@ -99,7 +98,7 @@ public class StudyMaterialAdapter extends RecyclerView.Adapter<StudyMaterialAdap
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-         final WebView tvDetailId;
+         final TextView tvDetailId;
         ImageView categoryLogoIv;
         TextView tvHeaderID;
         CardView categryLayoutCardview;
@@ -111,7 +110,7 @@ public class StudyMaterialAdapter extends RecyclerView.Adapter<StudyMaterialAdap
 
 
             tvHeaderID = (TextView) itemView.findViewById(R.id.tvHeaderID);
-            tvDetailId = (WebView) itemView.findViewById(R.id.tvContentId);
+            tvDetailId = (TextView) itemView.findViewById(R.id.tvContentId);
 
         }
     }

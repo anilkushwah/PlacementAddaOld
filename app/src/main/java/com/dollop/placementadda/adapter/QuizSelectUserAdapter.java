@@ -2,8 +2,8 @@ package com.dollop.placementadda.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.ExamInstructionActivity;
 
 import com.dollop.placementadda.model.LeaderBoardModel;
-import com.dollop.placementadda.model.QuizListModel;
 import com.dollop.placementadda.sohel.S;
 
 import java.util.List;

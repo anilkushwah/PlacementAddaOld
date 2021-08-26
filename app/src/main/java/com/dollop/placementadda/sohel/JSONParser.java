@@ -35,6 +35,7 @@ public class JSONParser {
     public JSONParser(Context cx) {
         this.cx = cx;
     }
+
     public JSONParser() {
     }
 
@@ -164,63 +165,66 @@ public class JSONParser {
             } else {
                 S.T(cx, cx.getString(R.string.no_internet));
             }
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
-public void parseVollyStringRequestForService(String url, int method, final Map<String, String> params, final Helper h) {
+
+    public void parseVollyStringRequestForService(String url, int method, final Map<String, String> params, final Helper h) {
         //method GET=0,POST=1
         try {
 
-                if (method == 0 || method == 1) {
+            if (method == 0 || method == 1) {
 
-                    final StringRequest jsObjRequest = new StringRequest
-                            (method, url, new Response.Listener<String>() {
-                                @Override
-                                public void onResponse(String response) {
-                                    //M.E("Response: " + response.toString());
-                                    if (response != null) {
+                final StringRequest jsObjRequest = new StringRequest
+                        (method, url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                //M.E("Response: " + response.toString());
+                                if (response != null) {
 //                                    materialDialog.dismiss();
 //                                    progressdialog.dismiss();materialDialog.dismiss();
                                     /*if (response.toString().contains("This Id used in another device. Please contact to admin.")) {
                                         S.I_clear(cx, LoginActivity.class, null);
                                         UserDataHelper.getInstance().deleteAll();
                                     }*/
-                                        h.backResponse(response.toString());
-                                    } else {
-                                        S.E("Invalid Request Method");
-                                    }
+                                    h.backResponse(response.toString());
+                                } else {
+                                    S.E("Invalid Request Method");
                                 }
-                            }, new Response.ErrorListener() {
+                            }
+                        }, new Response.ErrorListener() {
 
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    try {
-                                        String err = (error.getMessage() == null) ? "Parse Fail" : error.getMessage();
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                try {
+                                    String err = (error.getMessage() == null) ? "Parse Fail" : error.getMessage();
 //                                materialDialog.dismiss();
 //                                progressdialog.dismiss();materialDialog.dismiss();
 
-                                        h.backResponse("error");
-                                        S.E("sdcard-err2:" + err);
-                                        S.E("Something went wrong.!");
-                                    } catch (Exception e) {
-                                    }
+                                    h.backResponse("error");
+                                    S.E("sdcard-err2:" + err);
+                                    S.E("Something went wrong.!");
+                                } catch (Exception e) {
                                 }
-                            }) {
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            //returning parameters
-                            return params;
-                        }
-                    };
-                    // Adding request to request queue
-                    AppController.getInstance().addToRequestQueue(jsObjRequest);
+                            }
+                        }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        //returning parameters
+                        return params;
+                    }
+                };
+                // Adding request to request queue
+                AppController.getInstance().addToRequestQueue(jsObjRequest);
 
 
-                } else {
-                    S.E("Invalid Request Method");
-                }
+            } else {
+                S.E("Invalid Request Method");
+            }
 
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
 
     }
 
@@ -239,9 +243,10 @@ public void parseVollyStringRequestForService(String url, int method, final Map<
                                     if (response.toString().contains("This Id used in another device. Please contact to admin.")) {
                                         S.I_clear(cx, LoginsActivity.class, null);
                                         UserDataHelper.getInstance().deleteAll();
-                                    }else {
+                                    } else {
                                         h.backResponse(response.toString());
-                                    }   } else {
+                                    }
+                                } else {
                                     S.E("Invalid Request Method");
                                 }
                             }

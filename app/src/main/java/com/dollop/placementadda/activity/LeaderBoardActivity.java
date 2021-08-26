@@ -3,26 +3,16 @@ package com.dollop.placementadda.activity;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.BottomNoListAdapter;
-import com.dollop.placementadda.adapter.LeaderBoardAdapter;
-import com.dollop.placementadda.adapter.MainFragmentAdapter;
-import com.dollop.placementadda.adapter.QuizQuetionaryAdapter;
 import com.dollop.placementadda.adapter.ScoresAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.LeaderBoardModel;
-import com.dollop.placementadda.model.MainFragModel;
-import com.dollop.placementadda.model.SelectedListModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
@@ -36,10 +26,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-import me.relex.circleindicator.CircleIndicator;
 
 public class LeaderBoardActivity extends BaseActivity {
     //Leader Board Activity is use for show user rank place in this app total quiz result

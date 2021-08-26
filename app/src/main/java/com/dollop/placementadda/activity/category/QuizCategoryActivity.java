@@ -1,19 +1,16 @@
 package com.dollop.placementadda.activity.category;
 
 import android.os.Handler;
-import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.Toast;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.QuizSubCategoryActivity;
 import com.dollop.placementadda.activity.QuizTopicActivity;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.QuizCategoryAdapter;
 import com.dollop.placementadda.model.QuizCategoryModel;
 import com.dollop.placementadda.model.QuizSubCategoryModel;
 import com.dollop.placementadda.sohel.Const;
@@ -28,9 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
-import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 
 public class QuizCategoryActivity extends BaseActivity {
 

@@ -13,7 +13,7 @@
 
     <include layout="@layout/tool_bar" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/discussionCommentRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -60,7 +60,7 @@
                     android:padding="8dp"
                     android:scaleType="fitCenter" />
 
-                <hani.momanii.supernova_emoji_library.Helper.EmojiconEditText
+                <EditText
                     android:id="@+id/editEmojicon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
             android:layout_weight="1.6"
             android:gravity="center">
 
-            <android.support.design.widget.FloatingActionButton
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/send"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

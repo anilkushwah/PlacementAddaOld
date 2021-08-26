@@ -1,5 +1,6 @@
 package com.dollop.placementadda.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
@@ -7,14 +8,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.BitmapDrawable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +29,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.dollop.placementadda.database.model.UserModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
@@ -46,8 +46,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+
 
 import com.dollop.placementadda.activity.basic.BaseActivity;
 
@@ -55,8 +54,8 @@ import com.dollop.placementadda.activity.basic.BaseActivity;
 public class FinalPostDiscussionActivity extends BaseActivity {
     ImageView main_image, cancel_imgview;
     String FImage;
-    EmojIconActions emojIcon;
-    EmojiconEditText emojiconEditText;
+  //  EmojIconActions emojIcon;
+    EditText emojiconEditText;
     ImageView emojiImageView;
     FloatingActionButton send;
     View rootView;
@@ -69,6 +68,7 @@ public class FinalPostDiscussionActivity extends BaseActivity {
         return R.layout.activity_final_post_discussion;
     }
 
+    @SuppressLint("WrongThread")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,12 +105,12 @@ public class FinalPostDiscussionActivity extends BaseActivity {
             Bitmap myBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length);
             main_image.setImageBitmap(myBitmap);
         }
-        emojiconEditText = (EmojiconEditText) findViewById(R.id.editEmojicon);
+        emojiconEditText = (EditText) findViewById(R.id.editEmojicon);
         emojiImageView = (ImageView) findViewById(R.id.emojiIcon);
 
         send = (FloatingActionButton) findViewById(R.id.send);
         rootView = findViewById(R.id.root_view);
-        emojIcon = new EmojIconActions(FinalPostDiscussionActivity.this, rootView, emojiconEditText, emojiImageView);
+      /*  emojIcon = new EmojIconActions(FinalPostDiscussionActivity.this, rootView, emojiconEditText, emojiImageView);
 
         emojIcon.ShowEmojIcon();
         emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
@@ -124,7 +124,7 @@ public class FinalPostDiscussionActivity extends BaseActivity {
             public void onKeyboardClose() {
 
             }
-        });
+        });*/
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

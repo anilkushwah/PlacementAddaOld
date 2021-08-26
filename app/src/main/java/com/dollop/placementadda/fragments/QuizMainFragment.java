@@ -9,16 +9,27 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.ads.AdError;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +38,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cunoraz.gifview.library.GifView;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -65,7 +75,6 @@ import com.dollop.placementadda.sohel.S;
 import com.dollop.placementadda.sohel.SavedData;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.squareup.picasso.Picasso;
 
@@ -138,6 +147,7 @@ public class QuizMainFragment extends Fragment implements BaseSliderView.OnSlide
     private TextView UserName;
     private TextView totalNumberTV;
     CircleImageView ic_user_imageview;
+    private AdView mAdView;
 
 
     public QuizMainFragment() {
@@ -148,15 +158,74 @@ public class QuizMainFragment extends Fragment implements BaseSliderView.OnSlide
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_quiz_main, container, false);
-        AdView mAdView = view.findViewById(R.id.adView);
+        AdView adView = new AdView(requireActivity());
 
+        adView.setAdSize(AdSize.BANNER);
 
-        MobileAds.initialize(getActivity(), "ca-app-pub-9640495884863409~1242406785");
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("02C53424006E9E58B04EA68DD69C2521").build();
+        adView.setAdUnitId("ca-app-pub-3496220705060137/5397976076");
+
+        MobileAds.initialize(requireActivity(), new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = view.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
-        mInterstitialAd = new InterstitialAd(getActivity());
-        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
-        mInterstitialAd.loadAd(new AdRequest.Builder().addTestDevice("02C53424006E9E58B04EA68DD69C2521").build());
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+        InterstitialAd.load(requireActivity(),"ca-app-pub-3496220705060137/2175796802", adRequest,
+                new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                        // The mInterstitialAd reference will be null until
+                        // an ad is loaded.
+                        mInterstitialAd = interstitialAd;
+
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error
+
+                        mInterstitialAd = null;
+                    }
+                });
+
+
+        if (mInterstitialAd != null) {
+            mInterstitialAd.show(requireActivity());
+        } else {
+            Log.d("TAG", "The interstitial ad wasn't ready yet.");
+        }
 
         bottom_sheet = view.findViewById(R.id.bottom_sheet);
         sheetBehavior = BottomSheetBehavior.from(bottom_sheet);
@@ -285,15 +354,15 @@ public class QuizMainFragment extends Fragment implements BaseSliderView.OnSlide
         cdOurPlacementId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_LONG).show();
-              //  S.I(getActivity(), OurPlacementActivity.class, null);
+               // Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_LONG).show();
+                S.I(getActivity(), OurPlacementActivity.class, null);
             }
         });
         cdCodingProblemId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   S.I(getActivity(), ProgramListActivity.class, null);
-                Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_LONG).show();
+                S.I(getActivity(), ProgramListActivity.class, null);
+              //  Toast.makeText(getActivity(),"Coming Soon",Toast.LENGTH_LONG).show();
             }
         });
 

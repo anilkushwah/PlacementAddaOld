@@ -2,26 +2,23 @@ package com.dollop.placementadda.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.DiscussionAdapter;
 import com.dollop.placementadda.adapter.DiscussionCommentAdapter;
-import com.dollop.placementadda.adapter.TimeLineAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.DiscussionCommentModel;
-import com.dollop.placementadda.model.DiscussionForumModel;
-import com.dollop.placementadda.model.TimeLineModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
@@ -36,15 +33,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import hani.momanii.supernova_emoji_library.Actions.EmojIconActions;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
+
 
 public class CommentActivity extends BaseActivity {
 String discussion;
 RecyclerView discussionCommentRecyclerView;
 ArrayList<DiscussionCommentModel> discussionCommentModelslist=new ArrayList<>();
-    EmojIconActions emojIcon;
-    EmojiconEditText emojiconEditText;
+   // EmojIconActions emojIcon;
+    EditText emojiconEditText;
     ImageView emojiImageView;
     View rootView;FloatingActionButton send;
     @Override
@@ -57,7 +53,7 @@ ArrayList<DiscussionCommentModel> discussionCommentModelslist=new ArrayList<>();
         super.onCreate(savedInstanceState);
         checkNetworkAvailability(CommentActivity.this);
         setToolbarWithBackButton("Comment");
-        emojiconEditText = (EmojiconEditText)findViewById(R.id.editEmojicon);
+        emojiconEditText = (EditText)findViewById(R.id.editEmojicon);
         emojiImageView = (ImageView)findViewById(R.id.emojiIcon);
         discussionCommentRecyclerView=(RecyclerView)findViewById(R.id.discussionCommentRecyclerView);
         send=(FloatingActionButton)findViewById(R.id.send);
@@ -65,10 +61,10 @@ ArrayList<DiscussionCommentModel> discussionCommentModelslist=new ArrayList<>();
         discussion=bundle.getString("discussion_id");
         getDiscussionComment();
         rootView = findViewById(R.id.root_view);
-        emojIcon = new EmojIconActions(CommentActivity.this, rootView, emojiconEditText, emojiImageView);
-        emojIcon.ShowEmojIcon();
-        emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
-        emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
+     //   emojIcon = new EmojIconActions(CommentActivity.this, rootView, emojiconEditText, emojiImageView);
+     //   emojIcon.ShowEmojIcon();
+      //  emojIcon.setIconsIds(R.drawable.ic_action_keyboard, R.drawable.smiley);
+      /*  emojIcon.setKeyboardListener(new EmojIconActions.KeyboardListener() {
             @Override
             public void onKeyboardOpen() {
             }
@@ -76,7 +72,7 @@ ArrayList<DiscussionCommentModel> discussionCommentModelslist=new ArrayList<>();
             @Override
             public void onKeyboardClose() {
             }
-        });
+        });*/
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,14 +137,15 @@ ArrayList<DiscussionCommentModel> discussionCommentModelslist=new ArrayList<>();
         return param;
     }
     private void SubmitDiscussionComment() {
-        new JSONParser(CommentActivity.this).parseVollyStringRequest(Const.URL.submitDiscussionComment, 1, getSubmitDiscussionCommentParams(), new Helper() {
+        new JSONParser(CommentActivity.this).parseVollyStringRequest(Const.URL.submitDiscussionComment, 1,
+                getSubmitDiscussionCommentParams(), new Helper() {
             @Override
             public void backResponse(String response) {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject.getString("message").equals("success")) {
                         emojiconEditText.setText("");
-                        emojIcon.closeEmojIcon();
+                     //   emojIcon.closeEmojIcon();
                         getDiscussionComment();
                         } else {
                         S.T(CommentActivity.this, jsonObject.getString("message"));

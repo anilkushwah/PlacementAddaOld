@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:id="@+id/categryLayoutCardview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,7 +47,7 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     android:background="#dddddd" />
 
-                <WebView
+                <TextView
                     android:id="@+id/tvContentId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -63,5 +63,5 @@
 
             </LinearLayout>
         </ScrollView>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

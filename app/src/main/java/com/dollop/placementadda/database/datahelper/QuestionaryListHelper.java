@@ -90,9 +90,11 @@ public class QuestionaryListHelper {
     }
 
     public ArrayList<QuestionaryModel> getList() {
+        open();
         ArrayList<QuestionaryModel> userItem = new ArrayList<QuestionaryModel>();
         read();
         Cursor cursor = db.rawQuery("select * from QuestionaryModel", null);
+
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToLast();
             do {

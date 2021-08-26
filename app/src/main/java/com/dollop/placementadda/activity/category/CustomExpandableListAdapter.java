@@ -5,30 +5,24 @@ import java.util.List;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.CardView;
+
+import androidx.cardview.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.CreateGroupActivity;
 import com.dollop.placementadda.activity.QuizMultiplierActivity;
-import com.dollop.placementadda.activity.QuizSubCategoryActivity;
 import com.dollop.placementadda.model.QuizSubCategoryModel;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
 import com.squareup.picasso.Picasso;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
 

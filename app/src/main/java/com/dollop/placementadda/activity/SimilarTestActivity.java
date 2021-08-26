@@ -3,16 +3,15 @@ package com.dollop.placementadda.activity;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.adapter.QuizesListAdapter;
 import com.dollop.placementadda.adapter.SimilarQuizesListAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.QuizListModel;
@@ -62,16 +61,18 @@ public class SimilarTestActivity extends BaseActivity {
         tvNoDataFoundId=findViewById(R.id.tvNoDataFoundId);
 
         Bundle bundle = getIntent().getExtras();
+
         // topicId =  bundle.getString("Subjecttopic_ID");
 
         if (bundle != null) {
-            if (bundle.getString("ActivityCheck").equals("QuizCategery")) {
+            if (bundle.getString("ActivityCheck ").equals("QuizCategery")) {
                 ActivityCheck = bundle.getString("ActivityCheck");
                 Subjecttopic_ID = bundle.getString("Subjecttopic_ID");
                 CategerySubject_ID = bundle.getString("CategerySubject_ID");
                 SelectedQuizCategeryId = bundle.getString("SelectedQuizCategeryId");
                 OtherUserId = bundle.getString("OtherUserId");
-            } else if (bundle.getString("ActivityCheck").equals("Twoplayer")) {
+            } else
+                if (bundle.getString("ActivityCheck").equals("Twoplayer")) {
                 if (bundle.getString("Member_number").equals("2")) {
                     ActivityCheck = bundle.getString("ActivityCheck");
                     Subjecttopic_ID = bundle.getString("Subjecttopic_ID");
@@ -124,7 +125,8 @@ public class SimilarTestActivity extends BaseActivity {
                     OtherThirdGender = bundle.getString("OtherThirdGender");
                     OtherThirdUserProfilePic = bundle.getString("OtherThirdUserProfilePic");
                 }
-            } else if (bundle.getString("ActivityCheck").equals("QuizMultiplier")) {
+            } else
+                if (bundle.getString("ActivityCheck").equals("QuizMultiplier")) {
                 ActivityCheck = bundle.getString("ActivityCheck");
                 Subjecttopic_ID = bundle.getString("Subjecttopic_ID");
                 CategerySubject_ID = bundle.getString("CategerySubject_ID");

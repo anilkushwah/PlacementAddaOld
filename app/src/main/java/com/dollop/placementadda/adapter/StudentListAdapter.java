@@ -1,9 +1,9 @@
 package com.dollop.placementadda.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.OurPlacementStudentsActivity;
-import com.dollop.placementadda.model.CompanyModel;
 import com.dollop.placementadda.model.PlacedStudentModel;
-import com.dollop.placementadda.sohel.S;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -86,12 +83,14 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
         }
         holder.tvStudentNameId.setText(subCatModel.full_name);
         holder.tvYearId.setText(subCatModel.year);
+        holder.tvPackageId.setText(subCatModel.packg);
+
 
     }
 
     @Override
     public int getItemCount() {
-        return (null != QuizListModelList ? QuizListModelList.size() : 0);
+        return QuizListModelList.size();
     }
 
 
@@ -108,6 +107,7 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
             ivStudentId = (ImageView) itemView.findViewById(R.id.ivStudentId);
             tvStudentNameId = (TextView) itemView.findViewById(R.id.tvStudentNameId);
             tvYearId = (TextView) itemView.findViewById(R.id.tvYearId);
+            tvPackageId = (TextView) itemView.findViewById(R.id.tvPackageId);
 
 
         }

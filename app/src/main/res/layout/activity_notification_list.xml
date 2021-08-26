@@ -33,18 +33,18 @@
             android:background="@color/card_background"
             android:orientation="vertical">
 
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/categoryRV"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                </android.support.v7.widget.RecyclerView>
-            </android.support.v7.widget.CardView>
+                </androidx.recyclerview.widget.RecyclerView>
+            </androidx.cardview.widget.CardView>
 
         </LinearLayout>
     </LinearLayout>

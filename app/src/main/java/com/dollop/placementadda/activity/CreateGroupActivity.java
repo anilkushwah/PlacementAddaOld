@@ -1,34 +1,22 @@
 package com.dollop.placementadda.activity;
 
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
 import com.dollop.placementadda.adapter.CreateGroupAdapter;
-import com.dollop.placementadda.adapter.QuizCategoryAdapter;
-import com.dollop.placementadda.adapter.SelectTwoPlayerAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.CreateGroupModel;
-import com.dollop.placementadda.model.LeaderBoardModel;
-import com.dollop.placementadda.model.QuizCategoryModel;
 import com.dollop.placementadda.notification.Config;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
-import com.dollop.placementadda.sohel.SavedData;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,8 +28,6 @@ import java.util.Map;
 
 import jp.wasabeef.recyclerview.adapters.AlphaInAnimationAdapter;
 import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
-
-import static com.dollop.placementadda.sohel.Const.URL.getWalletAmount;
 
 public class CreateGroupActivity extends BaseActivity {
     RecyclerView selectPlayerRv;

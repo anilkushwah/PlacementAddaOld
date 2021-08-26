@@ -2,8 +2,8 @@ package com.dollop.placementadda.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +13,7 @@ import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.OurPlacementStudentsActivity;
-import com.dollop.placementadda.activity.QuizesActivity;
 import com.dollop.placementadda.model.CompanyModel;
-import com.dollop.placementadda.model.QuizListModel;
-import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
 import com.squareup.picasso.Picasso;
 
@@ -82,7 +79,7 @@ public class CompanyLIstAdapter extends RecyclerView.Adapter<CompanyLIstAdapter.
         final CompanyModel subCatModel = QuizListModelList.get(position);
 
         holder.tvCompanyNameId.setText(subCatModel.strCompanyName);
-        if (subCatModel.strCompanyImage!=null) {
+        if (subCatModel.strCompanyImage != null) {
             Picasso.with(context).load(subCatModel.strCompanyImage).error(R.drawable.ic_user).into(holder.ivCompnayImageId);
 
         } else {
@@ -90,9 +87,10 @@ public class CompanyLIstAdapter extends RecyclerView.Adapter<CompanyLIstAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putString("companyId",subCatModel.strCompanyId);
-                S.I(context, OurPlacementStudentsActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("companyId", subCatModel.strCompanyId);
+                bundle.putString("companyName", subCatModel.strCompanyName);
+                S.I(context, OurPlacementStudentsActivity.class, bundle);
             }
         });
 
@@ -100,13 +98,13 @@ public class CompanyLIstAdapter extends RecyclerView.Adapter<CompanyLIstAdapter.
 
     @Override
     public int getItemCount() {
-        return (null != QuizListModelList ? QuizListModelList.size() : 0);
+        return QuizListModelList.size();
     }
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-       ImageView ivCompnayImageId;
-       TextView tvCompanyNameId;
+        ImageView ivCompnayImageId;
+        TextView tvCompanyNameId;
         CardView mainCardview;
 
         public MyViewHolder(View itemView) {

@@ -9,7 +9,7 @@
     android:layout_height="@dimen/_300sdp"
     android:visibility="visible">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -115,5 +115,5 @@
                 android:src="@drawable/ic_close_btns" />
 
         </RelativeLayout>
-    </android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>

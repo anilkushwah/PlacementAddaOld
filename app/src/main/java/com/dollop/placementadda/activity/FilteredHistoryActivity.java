@@ -1,20 +1,16 @@
 package com.dollop.placementadda.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
 import com.dollop.placementadda.adapter.FilteredHistoryAdapter;
-import com.dollop.placementadda.adapter.MoreCoinsAdapter;
-import com.dollop.placementadda.adapter.ScoresAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.model.FilteredHistory;
-import com.dollop.placementadda.model.LeaderBoardModel;
-import com.dollop.placementadda.model.MoreCoinsModel;
 import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;

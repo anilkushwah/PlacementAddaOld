@@ -5,29 +5,23 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.location.Address;
-import android.location.Geocoder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AlertDialog;
-import android.telephony.TelephonyManager;
-import android.text.Html;
-import android.util.Base64;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.appcompat.app.AlertDialog;
+
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
@@ -37,14 +31,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkResponse;
@@ -56,7 +47,6 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.basic.BaseActivity;
-import com.dollop.placementadda.activity.basic.SignUpActivity;
 import com.dollop.placementadda.adapter.PlaceArrayAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
 import com.dollop.placementadda.database.model.UserModel;
@@ -66,6 +56,7 @@ import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
+import com.dollop.placementadda.sohel.SavedData;
 import com.dollop.placementadda.sohel.UserAccount;
 import com.dollop.placementadda.sohel.multipart.AppHelper;
 import com.dollop.placementadda.sohel.multipart.VolleyMultipartRequest;
@@ -86,16 +77,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -131,7 +115,6 @@ public class UpdateProfileActivity extends BaseActivity implements GoogleApiClie
     private String selectedCollage = "";
     private String selectedGender = "";
     private String hidden_image = "";
-    private String[] collegeList = {"Select College", "M.I.T. Indore", "Acropolis Institute Indore", "SDPS College Indore", "IPS Academy Indore", "Chameli Devi College Indore", "Prestige College Indore"};
     private int aPosition = 0;
     String userProfilePic, userAddress, userEmail, user_id = "", userName = "", userPhone = "", userDOB, userDOJ, userGender, userCollegeName, user_is_verified, user_is_active;
     private DatePicker datePicker;
@@ -226,16 +209,8 @@ public class UpdateProfileActivity extends BaseActivity implements GoogleApiClie
             }
         });
 
-        askForPermission(Manifest.permission.READ_PHONE_STATE, 101);
-        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
 
-            return;
-        }
-        S.E("check runtime" + telephonyManager.getDeviceId());
-
-        telephonyManagerStr = telephonyManager.getDeviceId();
+        telephonyManagerStr = SavedData.getIMEI_NUMBER();
         try {
             etSignUpAddress.setThreshold(3);
             etSignUpAddress.setOnItemClickListener(mAutocompleteClickListener);

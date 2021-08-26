@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     >
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tool_bar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_50sdp"
@@ -53,7 +53,7 @@
                         android:textStyle="bold"
                         android:id="@+id/name_et"/>
                 </LinearLayout>
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -86,7 +86,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_80sdp"
                     android:layout_above="@+id/post_discussion_image_btn">
-                   <android.support.v7.widget.RecyclerView
+                   <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/Galleryimage_recycleview"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
@@ -118,7 +118,7 @@
         </RelativeLayout>
 
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 
 </RelativeLayout>

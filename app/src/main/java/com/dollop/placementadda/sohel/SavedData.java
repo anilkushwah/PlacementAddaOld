@@ -22,9 +22,8 @@ public class SavedData {
     private static final String MESSAGEDATA = "message";
     private static final String FCMNOTIFICATIONREQUEST = "yesNo";
     private static final String FCMNOTIFICATIONREQUESTGAMESTART = "GameStart";
-    private static final String FCMNOTIFICATIONREQUESTId= "fcmid";
-    private static final String UPDATEPROFILECHECK= "updatedprofile";
-
+    private static final String FCMNOTIFICATIONREQUESTId = "fcmid";
+    private static final String UPDATEPROFILECHECK = "updatedprofile";
 
 
     private static final String QuizContinueCheck = "QuizContinueCheck";
@@ -40,8 +39,9 @@ public class SavedData {
     private static final String TWO_Player_User_ID = "user_id";
     private static final String THREE_Player_User_ID = "users_id";
     private static final String CheckReadyToPlay = "checkReadyToPlay";
-    private static final String CATEGORY_IMAGE=Const.URL.Categry_Image;
-/*Order ID 146381161*/
+    private static final String IMEI_NUMBER = "number";
+    private static final String CATEGORY_IMAGE = Const.URL.Categry_Image;
+    /*Order ID 146381161*/
 
     public static boolean getCheckQuetionaryOn() {
         return getInstance().getBoolean(QuizContinueCheck, false);
@@ -50,6 +50,16 @@ public class SavedData {
     public static void saveCheckQuestionary(boolean startKm) {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putBoolean(QuizContinueCheck, startKm);
+        editor.apply();
+    }
+
+    public static String getIMEI_NUMBER() {
+        return getInstance().getString(IMEI_NUMBER, "");
+    }
+
+    public static void saveIMEI_NUMBER(String startKm) {
+        SharedPreferences.Editor editor = getInstance().edit();
+        editor.putString(IMEI_NUMBER, startKm);
         editor.apply();
     }
 
@@ -62,8 +72,6 @@ public class SavedData {
         editor.putString(NOTIFICATION_Status, notificationJson_Status);
         editor.apply();
     }
-
-
 
 
     public static String getNotificationJson() {
@@ -271,6 +279,7 @@ public class SavedData {
         editor.putString(FCMNOTIFICATIONREQUESTGAMESTART, occasionStatus);
         editor.apply();
     }
+
     private static final String USERTYPE = "user_type";
     private static final String TOKEN = "token_id";
     private static final String LOGIN = "log_in";
@@ -328,7 +337,8 @@ public class SavedData {
         editor.apply();
 
     }
- public static int getAvalableBalance() {
+
+    public static int getAvalableBalance() {
         return getInstance().getInt(AvalableBalance, 0);
     }
 
@@ -349,6 +359,7 @@ public class SavedData {
         editor.apply();
 
     }
+
     public static String getTwoPlayerUserID() {
         return getInstance().getString(TWO_Player_User_ID, "");
     }
@@ -357,9 +368,10 @@ public class SavedData {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putString(TWO_Player_User_ID, coin);
         editor.apply();
-       // editor.clear();
+        // editor.clear();
 
     }
+
     public static String getThreeOfFirstPlayerUserID() {
         return getInstance().getString(THREE_Player_User_ID, "");
     }
@@ -368,11 +380,13 @@ public class SavedData {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putString(THREE_Player_User_ID, UID);
         editor.apply();
-       // editor.clear();
+        // editor.clear();
     }
+
     public static String getFcmTokenID() {
         return getInstance().getString(FCMNOTIFICATIONREQUESTId, "");
     }
+
     public static void saveFcmTokenID(String token) {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putString(FCMNOTIFICATIONREQUESTId, token);
@@ -382,21 +396,27 @@ public class SavedData {
     public static String getCategoryImage() {
         return getInstance().getString(CATEGORY_IMAGE, "");
     }
+
     public static void saveCategoryImage(String image) {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putString(CATEGORY_IMAGE, image);
         editor.apply();
     }
-  public static String getProfileUpdate() {
+
+    public static String getProfileUpdate() {
         return getInstance().getString(UPDATEPROFILECHECK, "");
     }
+
     public static void saveProfileUpdate(String check) {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putString(UPDATEPROFILECHECK, check);
         editor.apply();
-    } public static String readyToPlayStore() {
+    }
+
+    public static String readyToPlayStore() {
         return getInstance().getString(CheckReadyToPlay, "");
     }
+
     public static void saveReadyToPlay(String check) {
         SharedPreferences.Editor editor = getInstance().edit();
         editor.putString(CheckReadyToPlay, check);

@@ -3,12 +3,11 @@ package com.dollop.placementadda.activity.basic;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.widget.ImageView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.notification.Config;
-import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
 import com.squareup.picasso.Picasso;
 

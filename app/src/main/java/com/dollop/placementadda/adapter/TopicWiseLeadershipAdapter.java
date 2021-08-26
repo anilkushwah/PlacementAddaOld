@@ -2,30 +2,23 @@ package com.dollop.placementadda.adapter;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+import androidx.cardview.widget.CardView;
+
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.dollop.placementadda.model.LeaderBoardModel;
-import com.dollop.placementadda.model.MainFragModel;
 import com.dollop.placementadda.model.TopicWiseLeaderBoard;
 import com.dollop.placementadda.sohel.Const;
-import com.dollop.placementadda.sohel.S;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

@@ -1,25 +1,19 @@
 package com.dollop.placementadda.adapter;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.activity.QuizesActivity;
 import com.dollop.placementadda.model.NewBatchesModel;
-import com.dollop.placementadda.model.NewBatchesModel;
-import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.S;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

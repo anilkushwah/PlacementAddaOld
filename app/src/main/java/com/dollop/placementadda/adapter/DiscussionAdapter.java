@@ -3,64 +3,36 @@ package com.dollop.placementadda.adapter;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
 import com.dollop.placementadda.activity.CommentActivity;
-import com.dollop.placementadda.activity.ImagePreviewActivity;
 import com.dollop.placementadda.activity.basic.ImagePreviewActivity2;
 import com.dollop.placementadda.model.DiscussionForumModel;
-import com.dollop.placementadda.model.TimeLineModel;
-import com.dollop.placementadda.sohel.Const;
-import com.dollop.placementadda.sohel.Helper;
-import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
 import com.sackcentury.shinebuttonlib.ShineButton;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import hani.momanii.supernova_emoji_library.Helper.EmojiconEditText;
 
 public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.MyViewHolder> {
-    Context context;
-    private List<DiscussionForumModel> timeLineModelList;
-    int likeCount;
-    String post_id;RecyclerView comment_recycleview;
-    EmojiconEditText emojiconEditText;
     private static final int DELAY_SHOWING_SMILE_PANEL = 200;
+    Context context;
+    int likeCount;
+    String post_id;
+    RecyclerView comment_recycleview;
+    EditText emojiconEditText;
+    private List<DiscussionForumModel> timeLineModelList;
 
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView timeLineUserNameTv, timeLineDateTv, TitleText_tv, post_tv,likecount_tv,comment_count_tv;
-        public CircleImageView timeLineUserImage;
-        public ImageView postImageView;
-        ShineButton po_image1;
-        LinearLayout comment_layout;
-        //  public com.like.LikeButton facebookLikeBtn;
-
-        public MyViewHolder(View view) {
-            super(view);
-            timeLineUserNameTv = (TextView) view.findViewById(R.id.timeLineUserNameTv);
-            timeLineDateTv = (TextView) view.findViewById(R.id.timeLineDateTv);
-            TitleText_tv = (TextView) view.findViewById(R.id.TitleText_tv);
-            comment_count_tv = (TextView) view.findViewById(R.id.comment_count_tv);
-            post_tv = (TextView) view.findViewById(R.id.post_tv);
-            timeLineUserImage = (CircleImageView) view.findViewById(R.id.timeLineUserImage);
-            postImageView = (ImageView) view.findViewById(R.id.postImageView);
-            comment_layout = (LinearLayout) view.findViewById(R.id.comment_layout);
-        }
-    }
 
     public DiscussionAdapter(Context context, List<DiscussionForumModel> timeLineModelList) {
         this.timeLineModelList = timeLineModelList;
@@ -111,8 +83,7 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
                     holder.TitleText_tv.setVisibility(View.GONE);
                 }
             }
-        }
-        else {
+        } else {
             holder.postImageView.setVisibility(View.GONE);
             holder.TitleText_tv.setVisibility(View.VISIBLE);
             if (!timeLineModel.getDiscussion_topic().equals("")) {
@@ -125,10 +96,10 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
         holder.postImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* ConfirmPopup(timeLineModel.getImage());*/
-                Bundle bundle=new Bundle();
-                bundle.putString("userProfilePic2",timeLineModel.getImage());
-                S.I(context, ImagePreviewActivity2.class,bundle);
+                /* ConfirmPopup(timeLineModel.getImage());*/
+                Bundle bundle = new Bundle();
+                bundle.putString("userProfilePic2", timeLineModel.getImage());
+                S.I(context, ImagePreviewActivity2.class, bundle);
             }
         });
 
@@ -137,9 +108,9 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
             @Override
             public void onClick(View v) {
                 //CommentPopup();
-                Bundle bundle=new Bundle();
-                bundle.putString("discussion_id",timeLineModel.getDiscussion_id());
-                S.I(context, CommentActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("discussion_id", timeLineModel.getDiscussion_id());
+                S.I(context, CommentActivity.class, bundle);
             }
         });
     }
@@ -155,7 +126,7 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
         dialog.setContentView(R.layout.confirmfull_image_popup);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.setCanceledOnTouchOutside(false);
-        ImageView cancel_img,full_image;
+        ImageView cancel_img, full_image;
         cancel_img = (ImageView) dialog.findViewById(R.id.cancel_img);
         full_image = (ImageView) dialog.findViewById(R.id.full_image);
 
@@ -168,5 +139,26 @@ public class DiscussionAdapter extends RecyclerView.Adapter<DiscussionAdapter.My
         });
 
         dialog.show();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView timeLineUserNameTv, timeLineDateTv, TitleText_tv, post_tv, likecount_tv, comment_count_tv;
+        public CircleImageView timeLineUserImage;
+        public ImageView postImageView;
+        ShineButton po_image1;
+        LinearLayout comment_layout;
+        //  public com.like.LikeButton facebookLikeBtn;
+
+        public MyViewHolder(View view) {
+            super(view);
+            timeLineUserNameTv = (TextView) view.findViewById(R.id.timeLineUserNameTv);
+            timeLineDateTv = (TextView) view.findViewById(R.id.timeLineDateTv);
+            TitleText_tv = (TextView) view.findViewById(R.id.TitleText_tv);
+            comment_count_tv = (TextView) view.findViewById(R.id.comment_count_tv);
+            post_tv = (TextView) view.findViewById(R.id.post_tv);
+            timeLineUserImage = (CircleImageView) view.findViewById(R.id.timeLineUserImage);
+            postImageView = (ImageView) view.findViewById(R.id.postImageView);
+            comment_layout = (LinearLayout) view.findViewById(R.id.comment_layout);
+        }
     }
 }

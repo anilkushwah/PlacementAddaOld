@@ -9,15 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -28,15 +20,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.cunoraz.gifview.library.GifView;
-import com.dollop.placementadda.activity.basic.BaseActivity;
-
-
 import com.dollop.placementadda.R;
+import com.dollop.placementadda.activity.basic.BaseActivity;
 import com.dollop.placementadda.adapter.MoreCoinsAdapter;
 import com.dollop.placementadda.database.datahelper.UserDataHelper;
-import com.dollop.placementadda.library.LuckyWheelView;
-import com.dollop.placementadda.library.model.LuckyItem;
 import com.dollop.placementadda.model.MoreCoinsModel;
 import com.dollop.placementadda.model.TimeLineCommentModel;
 import com.dollop.placementadda.notification.Config;
@@ -44,13 +41,18 @@ import com.dollop.placementadda.sohel.Const;
 import com.dollop.placementadda.sohel.Helper;
 import com.dollop.placementadda.sohel.JSONParser;
 import com.dollop.placementadda.sohel.S;
-import com.dollop.placementadda.sohel.SavedData;
 import com.dollop.placementadda.sohel.UserAccount;
+import com.google.android.gms.ads.AdError;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardItem;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
-import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,17 +62,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdListener {
+public class MoreCoinsActivity extends BaseActivity {
+    private final static int REQUEST_READ_PHONE_STATE = 1;
+    CardView watchvideo_cardview, buy_cardview;
+    ProgressDialog progressDialog;
     private List<MoreCoinsModel> moreCoinsModelArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MoreCoinsAdapter mAdapter;
-    CardView watchvideo_cardview, buy_cardview;
-    private final static int REQUEST_READ_PHONE_STATE = 1;
-    private RewardedVideoAd mRewardedVideoAd;
-    private String amount= String.valueOf(10);
-    private double coins=10.00;
-
-    ProgressDialog progressDialog;
+    private String amount = String.valueOf(10);
+    private double coins = 10.00;
+    private RewardedAd mRewardedAd;
+    boolean flag=false;
 
     @Override
     protected int getContentResId() {
@@ -86,15 +88,49 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
         watchvideo_cardview = (CardView) findViewById(R.id.watchvideo_cardview);
         buy_cardview = (CardView) findViewById(R.id.buy_cardview);
         progressDialog = new ProgressDialog(MoreCoinsActivity.this);
-        mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
-        mRewardedVideoAd.setRewardedVideoAdListener(this);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        RewardedAd.load(this, "ca-app-pub-3496220705060137/5157183364",
+                adRequest, new RewardedAdLoadCallback() {
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        // Handle the error.
+                        Log.d("TAG", loadAdError.getMessage());
+                        mRewardedAd = null;
+                    }
+
+                    @Override
+                    public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
+                        progressDialog.dismiss();
+                        mRewardedAd = rewardedAd;
+
+                        if(flag){
+                            mRewardedAd.show(MoreCoinsActivity.this, new OnUserEarnedRewardListener() {
+                                @Override
+                                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                                    flag=false;
+                                    AddCoin("10", "Watch a video");
+                                }
+                            });
+                        }
+                        Log.d("TAG", "Ad was loaded.");
+                    }
+                });
+
+
 
         mAdapter = new MoreCoinsAdapter(MoreCoinsActivity.this, moreCoinsModelArrayList);
         try {
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             recyclerView.setLayoutManager(mLayoutManager);
-        }catch (Exception e)
-        {e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         coinsData();
@@ -103,11 +139,7 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
             @Override
             public void onClick(View v) {
                 if (hasGetReadPhoneStatePermission()) {
-                    progressDialog.setMessage("Loading..."); // Setting Message
-                    progressDialog.setTitle("Video loading"); // Setting Title
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
-                    progressDialog.show(); // Display Progress Dialog
-                    progressDialog.setCancelable(false);
+
                     loadRewardedVideoAd();
                 } else {
                     requestReadPhoneStatePermission();
@@ -183,7 +215,7 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
                     coins_tv.setText("Get " + "0" + " Coins");
                 } else {
                     try {
-                         coins = Double.valueOf(amount_et.getText().toString()).doubleValue() * 10;
+                        coins = Double.valueOf(amount_et.getText().toString()).doubleValue() * 10;
                         coins_tv.setText("Get " + coins + " Coins");
                     } catch (Exception e) {
                     }
@@ -196,7 +228,7 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
                     coins_tv.setText("Get " + "0" + " Coins");
                 } else {
                     try {
-                         coins = Double.valueOf(amount_et.getText().toString()).doubleValue() * 10;
+                        coins = Double.valueOf(amount_et.getText().toString()).doubleValue() * 10;
                         coins_tv.setText("Get " + coins + " Coins");
                     } catch (Exception e) {
                     }
@@ -253,6 +285,7 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             String res = data.getStringExtra("response");
             String search = "SUCCESS";
@@ -266,74 +299,27 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
     }
 
     private void loadRewardedVideoAd() {
-           mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+        flag=true;
+        if (mRewardedAd == null) {
+            progressDialog.setMessage("Loading..."); // Setting Message
+            progressDialog.setTitle("Video loading"); // Setting Title
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER); // Progress Dialog Style Spinner
+            progressDialog.show(); // Display Progress Dialog
+            progressDialog.setCancelable(false);
+        } else
+            mRewardedAd.show(this, new OnUserEarnedRewardListener() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    // Handle the reward.
+              /*  Log.d(TAG, "The user earned the reward.");
+                int rewardAmount = rewardItem.getAmount();
+                String rewardType = rewardItem.getType();*/
+                    AddCoin("10", "Watch a video");
+                }
+            });
     }
 
-    @Override
-    public void onRewardedVideoAdLeftApplication() {
-        progressDialog.dismiss();
-//        Toast.makeText(this, "onRewardedVideoAdLeftApplication",
-//                Toast.LENGTH_SHORT).show();
-    }
 
-    @Override
-    public void onRewardedVideoAdClosed() {
-        progressDialog.dismiss();
-     /*   Toast.makeText(this, "onRewardedVideoAdClosed", Toast.LENGTH_SHORT).show();
-*/    }
-
-    @Override
-    public void onRewarded(RewardItem rewardItem) {
-        AddCoin("10", "Watch a video");
-    }
-
-    @Override
-    public void onRewardedVideoAdFailedToLoad(int errorCode) {
-        progressDialog.dismiss();
-     /*   Toast.makeText(this, "onRewardedVideoAdFailedToLoad", Toast.LENGTH_SHORT).show();*/
-    }
-
-    @Override
-    public void onRewardedVideoAdLoaded() {
-        if (mRewardedVideoAd.isLoaded()) {
-            mRewardedVideoAd.show();
-        }
-        progressDialog.dismiss();
-/*
-        Toast.makeText(this, "onRewardedVideoAdLoaded", Toast.LENGTH_SHORT).show();
-*/
-    }
-
-    @Override
-    public void onRewardedVideoAdOpened() {
-    }
-
-    @Override
-    public void onRewardedVideoStarted() {
-    }
-
-    @Override
-    public void onRewardedVideoCompleted() {
-
-    }
-
-    @Override
-    public void onResume() {
-        mRewardedVideoAd.resume(this);
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        mRewardedVideoAd.pause(this);
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        mRewardedVideoAd.destroy(this);
-        super.onDestroy();
-    }
 
     private void AddCoin(final String amount, final String Status) {
         new JSONParser(MoreCoinsActivity.this).parseVollyStringRequest(Const.URL.addWalletAmount, 1, getCommentParams(amount, Status), new Helper() {
@@ -342,8 +328,8 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
                 try {
                     ArrayList<TimeLineCommentModel> timeLineCommentModelslist = new ArrayList<>();
                     JSONObject jsonObject = new JSONObject(response);
-                    S.E("get Amount after ads"+response);
-                    S.E("add amount after ads param"+getCommentParams(amount,Status));
+                    S.E("get Amount after ads" + response);
+                    S.E("add amount after ads param" + getCommentParams(amount, Status));
                     if (jsonObject.getString("message").equals("success")) {
                         ConfirmPopup();
                     } else {
@@ -358,9 +344,9 @@ public class MoreCoinsActivity extends BaseActivity implements RewardedVideoAdLi
     protected Map<String, String> getCommentParams(String amount, String Status) {
         Map<String, String> param = new HashMap<>();
         param.put("user_id", UserDataHelper.getInstance().getList().get(0).getUserId());
-        param.put("amount",""+ coins);
+        param.put("amount", "" + coins);
         param.put("for", Status);
-          return param;
+        return param;
     }
 
     public void ConfirmPopup() {

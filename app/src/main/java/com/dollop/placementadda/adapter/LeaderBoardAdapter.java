@@ -1,20 +1,18 @@
 package com.dollop.placementadda.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dollop.placementadda.R;
-import com.dollop.placementadda.database.datahelper.UserDataHelper;
 
 import com.dollop.placementadda.model.LeaderBoardModel;
 import com.dollop.placementadda.model.MainFragModel;

@@ -3,7 +3,7 @@ package com.dollop.placementadda.activity;
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.widget.ImageView;
 
 import com.dollop.placementadda.R;
